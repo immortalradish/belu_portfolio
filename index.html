@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-<!--
-  Portfolio · Belén Ibáñez
-  Images served from cases/ folder (relative paths):
--->
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Belén Ibáñez, Senior Product Designer & UX Engineer</title>
+<meta name="description" content="Senior Product Designer & UX Engineer — 15+ years shipping data-heavy interfaces across fintech, cybersecurity, and enterprise B2B. Case studies in judgment, trade-offs, and measurable outcomes.">
+<link rel="canonical" href="https://belenibanez.com/">
+
+<!-- Open Graph / Twitter card. og:image below is a placeholder path — supply a real 1200×630 image at that path before sharing. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://belenibanez.com/">
+<meta property="og:title" content="Belén Ibáñez — Senior Product Designer & UX Engineer">
+<meta property="og:description" content="15+ years shipping data-heavy interfaces across fintech, cybersecurity, and enterprise B2B. Case studies in judgment, trade-offs, and measurable outcomes.">
+<meta property="og:image" content="https://belenibanez.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Belén Ibáñez — Senior Product Designer & UX Engineer">
+<meta name="twitter:description" content="15+ years shipping data-heavy interfaces across fintech, cybersecurity, and enterprise B2B.">
+<meta name="twitter:image" content="https://belenibanez.com/og-image.jpg">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231E40AF'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' font-weight='700' fill='%23fff' text-anchor='middle'%3EBI%3C/text%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..400&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Analytics: Plausible, deferred, no cookies. Set data-domain to the real domain before going live. -->
+<script defer data-domain="belenibanez.com" src="https://plausible.io/js/script.js"></script>
 <style>
   /* ───── tokens ───── */
   :root[data-theme="light"]{
@@ -28,6 +43,7 @@
     --border:#C2CDD9;
     --border-inverse:rgba(96,165,250,0.18);
     --accent:#1E40AF;
+    --accent-dark:#15306E;
     --accent-teal:#1E40AF;
     --link-accent:#1E40AF;
     --inv-accent:#60A5FA;
@@ -50,6 +66,7 @@
     --border:rgba(96,165,250,0.14);
     --border-inverse:#C2CDD9;
     --accent:#60A5FA;
+    --accent-dark:#4F8FF7;
     --accent-teal:#60A5FA;
     --link-accent:#60A5FA;
     --inv-accent:#1E40AF;
@@ -58,8 +75,21 @@
     --err:#e87264;
   }
 
+  :root{
+    /* spacing scale */
+    --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px;
+    --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px; --s-10:128px;
+    /* section rhythm (one value, used everywhere a major section changes) */
+    --section-y: var(--s-9);
+    --section-y-mobile: var(--s-8);
+    /* type scale (rendered UI text — mockup internals use their own reduced-scale numbers) */
+    --t-11:11px; --t-12:12px; --t-13:13px; --t-14:14px; --t-15:15px;
+    --t-16:16px; --t-17:17px;
+  }
+
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{background:var(--bg);color:var(--text);font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   body{overflow-x:hidden}
   a{color:inherit;text-decoration:none}
   button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
@@ -71,38 +101,43 @@
   .eyebrow{font-family:"DM Mono",monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);font-weight:500}
   h1,h2,h3{font-family:"Fraunces",serif;font-weight:700;letter-spacing:-0.01em;color:var(--text)}
   h4{font-family:"Inter",sans-serif;font-size:15px;font-weight:600;letter-spacing:-0.005em;color:var(--text)}
-  h1{font-size:clamp(60px,11vw,104px);line-height:0.94;letter-spacing:-0.02em;font-optical-sizing:auto}
+  h1{font-size:clamp(46px,11vw,104px);line-height:0.94;letter-spacing:-0.02em;font-optical-sizing:auto}
   h2{font-size:clamp(36px,5vw,56px);line-height:1.02;letter-spacing:-0.015em;font-optical-sizing:auto}
   h3{font-size:clamp(22px,2.4vw,28px);line-height:1.1;letter-spacing:-0.005em;font-optical-sizing:auto}
   p{color:var(--text-2)}
 
   /* ───── nav ───── */
   .nav{position:fixed;top:0;left:0;right:0;height:56px;background:color-mix(in oklab, var(--bg) 88%, transparent);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--border);z-index:90}
-  .nav-inner{height:100%;display:flex;align-items:center;gap:28px;max-width:1280px;margin:0 auto;padding:0 24px}
+  .nav-inner{height:100%;display:flex;align-items:center;gap:var(--s-6);max-width:1280px;margin:0 auto;padding:0 48px}
   .logo{font-family:"Fraunces",serif;font-weight:700;font-size:15px;letter-spacing:-0.01em;color:var(--text);transition:color .2s ease}
   .logo.at-top{color:var(--link-accent)}
-  .nav-links{display:flex;gap:22px;margin-left:auto}
-  .nav-link{font-family:"DM Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-2);padding:16px 2px;border-bottom:3px solid transparent;transition:color .15s ease, border-color .15s ease}
-  .nav-link:hover{color:var(--text)}
+  .nav-links{display:flex;gap:var(--s-5);margin-left:auto}
+  .nav-link{font-family:"Inter",sans-serif;font-size:var(--t-13);font-weight:500;color:var(--text-2);padding:16px 2px;border-bottom:3px solid transparent;transition:color .15s ease, border-color .15s ease}
+  .nav-link:hover{color:var(--accent-dark)}
   .nav-link.active{color:var(--text);font-weight:600;border-bottom-color:var(--link-accent)}
   .nav-right{display:flex;align-items:center;gap:10px}
-  .theme-btn{width:36px;height:36px;border:1px solid var(--border);border-radius:4px;display:inline-flex;align-items:center;justify-content:center}
+  .theme-btn{position:relative;width:36px;height:36px;border:none;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;background:transparent;transition:background .15s ease}
+  .theme-btn:hover,.theme-btn:focus-visible{background:var(--bg-card)}
+  .theme-btn::before{content:"";position:absolute;inset:-4px}
   .theme-btn svg{width:16px;height:16px;stroke:var(--text);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-  .cta{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:4px;font-family:"DM Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;font-weight:500;transition:transform .15s ease,background .15s ease}
+  .theme-tip{position:absolute;top:calc(100% + 9px);left:50%;transform:translateX(-50%) translateY(-4px);white-space:nowrap;background:var(--bg-inverse);color:var(--text-inverse);font-family:"Inter",sans-serif;font-size:11px;font-weight:600;padding:5px 9px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease}
+  .theme-btn:hover .theme-tip,.theme-btn:focus-visible .theme-tip{opacity:1;transform:translateX(-50%) translateY(0)}
+  .cta{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:4px;font-family:"Inter",sans-serif;font-size:var(--t-13);font-weight:600;transition:transform .15s ease,background .15s ease}
   .cta:hover{transform:translateY(-1px)}
   .cta.ghost{background:transparent;color:var(--text);border-color:var(--border)}
-  .cta.ghost.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .nav-menu-btn{display:none;width:36px;height:36px;border:1px solid var(--border);border-radius:4px;align-items:center;justify-content:center;cursor:pointer;background:transparent;flex-shrink:0}
+  .cta.ghost.active{background:color-mix(in oklab, var(--accent) 14%, transparent);color:var(--accent-dark);border-color:var(--accent)}
+  .nav-menu-btn{position:relative;display:none;width:36px;height:36px;border:1px solid var(--border);border-radius:4px;align-items:center;justify-content:center;cursor:pointer;background:transparent;flex-shrink:0}
+  .nav-menu-btn::before{content:"";position:absolute;inset:-4px}
   .nav-menu-btn svg{width:16px;height:16px;stroke:var(--text);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
   .nav-mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--border);z-index:89;padding:8px 18px 16px;flex-direction:column}
   .nav-mobile-menu.open{display:flex}
-  .nav-mobile-link{font-family:"DM Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-2);padding:13px 0;border-bottom:1px solid var(--border);transition:color .15s}
+  .nav-mobile-link{font-family:"Inter",sans-serif;font-size:var(--t-13);font-weight:500;color:var(--text-2);padding:13px 0;border-bottom:1px solid var(--border);transition:color .15s}
   .nav-mobile-link:last-of-type{border-bottom:none}
   .nav-mobile-link.active{color:var(--text);font-weight:600}
   .nav-mobile-cta{margin-top:14px;align-self:flex-start}
   @media (max-width: 820px){
     .nav-links{display:none}
-    .nav-inner{gap:8px;padding:0 18px}
+    .nav-inner{gap:8px;padding:0 22px}
     .nav-menu-btn{display:inline-flex}
   }
   @media (min-width: 821px){
@@ -115,8 +150,8 @@
   .hero-inner{position:relative;z-index:2;max-width:900px}
   .hero .eyebrow{margin-bottom:28px}
   .hero h1{margin:0 0 28px}
-  .hero-desc{font-size:clamp(16px,1.3vw,19px);color:var(--text-2);max-width:640px;margin-bottom:34px}
-  .hero-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border:1px solid var(--accent);color:#fff;background:var(--accent);border-radius:4px;font-family:"DM Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.1em}
+  .hero-desc{font-size:clamp(15.4px,1.58vw,19.8px);line-height:1.5;color:var(--text-2);max-width:900px;margin-bottom:34px}
+  .hero-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border:1px solid var(--accent);color:#fff;background:var(--accent);border-radius:4px;font-family:"Inter",sans-serif;font-size:var(--t-14);font-weight:600}
   .hero-cta:hover{transform:translateY(-1px)}
   .hero::before{
     content:"";
@@ -143,22 +178,25 @@
   .inverse h1,.inverse h2,.inverse h3,.inverse h4{color:var(--text-inverse)}
   .inverse .eyebrow{color:var(--text-inverse-dim)}
   .inverse p{color:var(--text-inverse-2)}
-  .about-top{max-width:720px;padding:96px 48px 40px;margin:0 auto}
+  .about-top{max-width:720px;padding:var(--section-y) 48px;margin:0 auto}
   .about-top .eyebrow{margin-bottom:20px}
   .about-top h2{margin-bottom:28px}
   .about-top p{margin-bottom:16px;font-size:17px;line-height:1.65}
   .about-top p strong{color:var(--text-inverse);font-weight:600}
-  @media (max-width:780px){.about-top{padding:72px 22px 28px}}
+  .about-meta{margin-top:var(--s-6);padding-top:var(--s-6);border-top:1px solid var(--border-inverse);display:flex;gap:var(--s-7);flex-wrap:wrap}
+  .about-meta-k{font-family:"DM Mono",monospace;font-size:var(--t-11);text-transform:uppercase;letter-spacing:0.12em;color:var(--text-inverse-dim);display:block;margin-bottom:6px}
+  .about-meta-v{color:var(--text-inverse);font-size:var(--t-14)}
+  @media (max-width:780px){.about-top{padding:var(--section-y-mobile) 22px}}
 
   .process{padding:24px 48px 96px;max-width:1280px;margin:0 auto}
   .process .eyebrow{margin-bottom:28px}
   .process-grid{position:relative;display:grid;grid-template-columns:repeat(8,1fr);gap:18px;margin-top:20px}
   .process-grid::before{
     content:"";position:absolute;top:19px;
-    left:var(--line-left, 19px);right:var(--line-right, 19px);
-    height:1px;background:rgba(255,255,255,0.22);z-index:0;
+    left:19px;right:calc((100% - 126px) / 8);
+    height:1px;background:rgba(255,255,255,0.25);z-index:0;
   }
-  [data-theme="dark"] .process-grid::before{background:rgba(0,0,0,0.22)}
+  [data-theme="dark"] .process-grid::before{background:rgba(0,0,0,0.25)}
   .step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
   .step-icon{width:38px;height:38px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:var(--bg-inverse);display:inline-flex;align-items:center;justify-content:center;z-index:1;transition:border-color .18s ease,color .18s ease}
   [data-theme="dark"] .step-icon{border-color:rgba(0,0,0,0.22);background:var(--bg-inverse)}
@@ -180,15 +218,16 @@
   }
 
   /* ───── section headers ───── */
-  .section{padding:120px 0}
+  .section{padding:var(--section-y) 0}
+  @media (max-width:780px){.section{padding:var(--section-y-mobile) 0}}
   .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-bottom:56px;border-bottom:1px solid var(--border);padding-bottom:20px}
   .section-head .left{max-width:560px}
   .section-head .eyebrow{margin-bottom:14px}
   .section-head .count{font-family:"DM Mono",monospace;font-size:11px;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase}
 
   /* ───── works ───── */
-  .works-list{display:flex;flex-direction:column;gap:28px}
-  .case{border:1px solid var(--border);border-radius:2px;background:var(--bg-card);padding:28px;display:grid;grid-template-columns:1.05fr 1.3fr;gap:36px;align-items:stretch;cursor:pointer;transition:border-color .18s ease,transform .2s ease}
+  .works-list{display:flex;flex-direction:column;gap:var(--s-6)}
+  .case{border:1px solid var(--border);border-radius:2px;background:var(--bg-card);padding:var(--s-5);display:grid;grid-template-columns:1.05fr 1.3fr;gap:var(--s-6);align-items:stretch;cursor:pointer;transition:border-color .18s ease,transform .2s ease}
   .case:hover{border-color:var(--text)}
   .case.rev{grid-template-columns:1.3fr 1.05fr}
   .case.rev .case-meta{order:2}
@@ -198,10 +237,11 @@
   .case-idx{font-family:"DM Mono",monospace;font-size:11px;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase}
   .case-company{font-family:"DM Mono",monospace;font-size:11px;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase}
   .case h3{margin:4px 0 6px;font-weight:700}
+  .case-shift{font-size:var(--t-14);line-height:1.6;color:var(--text-2);margin:0 0 12px}
   .case-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-  .chip{display:inline-flex;align-items:center;padding:5px 9px;border:1px solid var(--border);border-radius:4px;font-family:"DM Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-2);background:var(--bg);height:24px}
-  .case-outcome{margin-top:auto;padding-top:16px;border-top:1px dashed var(--border);font-family:"Inter";color:var(--text);font-size:14px}
-  .case-outcome span{color:var(--text-dim);font-family:"DM Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:6px}
+  .chip{display:inline-flex;align-items:center;padding:5px 9px;border:1px solid var(--border);border-radius:4px;font-family:"DM Mono",monospace;font-size:var(--t-11);text-transform:uppercase;letter-spacing:0.08em;color:var(--text-2);background:var(--bg);height:24px}
+  .case-outcome{margin-top:auto;padding-top:16px;border-top:1px dashed var(--border);font-family:"Inter";color:var(--text);font-size:var(--t-14)}
+  .case-outcome span{color:var(--text-dim);font-family:"DM Mono",monospace;font-size:var(--t-11);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:6px}
   .case-cta{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-family:"DM Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text)}
   .case-cta .arr{transition:transform .18s ease}
   .case:hover .case-cta .arr{transform:translateX(4px)}
@@ -240,13 +280,13 @@
   .gtt-reason{font-family:"Inter";font-size:9.5px;color:rgba(255,255,255,0.55);letter-spacing:0}
 
   @media (max-width:820px){
-    .case,.case.rev{grid-template-columns:1fr;padding:22px;gap:22px}
+    .case,.case.rev{grid-template-columns:1fr;padding:var(--s-4);gap:var(--s-4)}
     .case.rev .case-meta{order:1}.case.rev .case-visual{order:2}
     .case-visual{min-height:220px}
   }
 
   /* ───── skills ───── */
-  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-6)}
   .skill-group{border:1px solid var(--border);background:var(--bg-card);padding:28px;border-radius:2px}
   .skill-group h3{margin-bottom:18px;font-size:20px}
   .skill-group .eyebrow{margin-bottom:8px}
@@ -257,24 +297,38 @@
 
   /* ───── experience ───── */
   .exp{border-top:1px solid var(--border)}
-  .exp-row{display:grid;grid-template-columns:2fr 1.2fr 1.6fr 2.6fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--border);align-items:start}
+  .exp-row{display:grid;grid-template-columns:2fr 1.2fr 1.6fr 2.6fr;gap:var(--s-5);padding:var(--s-4) 0;border-bottom:1px solid var(--border);align-items:start}
   .exp-row .co{font-family:"Fraunces",serif;font-weight:700;font-size:17px;color:var(--text)}
-  .exp-row .dt{font-family:"DM Mono",monospace;font-size:11.5px;color:var(--text-dim);letter-spacing:0.08em;text-transform:uppercase;padding-top:4px}
+  .exp-row .dt{font-family:"DM Mono",monospace;font-size:var(--t-12);color:var(--text-dim);letter-spacing:0.08em;text-transform:uppercase;padding-top:4px}
   .exp-row .role{font-size:14px;color:var(--text);padding-top:2px}
   .exp-row .desc{font-size:14px;color:var(--text-2);line-height:1.5}
   .exp-row .loc{font-family:"DM Mono",monospace;font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-top:4px}
   @media (max-width:900px){
-    .exp-row{grid-template-columns:1fr;gap:6px;padding:22px 0}
+    .exp-row{grid-template-columns:1fr;gap:var(--s-1);padding:var(--s-4) 0}
     .exp-row .role{padding-top:4px}
   }
 
+  /* ───── principles (nested in the inverse About section) ───── */
+  .principles{margin-top:var(--s-6);border-top:1px solid var(--border-inverse)}
+  .principle{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:var(--s-5);padding:var(--s-4) 0;border-bottom:1px solid var(--border-inverse)}
+  .principle-t{font-size:var(--t-14);color:var(--text-inverse);font-weight:600}
+  .principle-t span{font-weight:400;color:var(--text-inverse-2)}
+  .principle-link{font-family:"DM Mono",monospace;font-size:var(--t-11);text-transform:uppercase;letter-spacing:0.08em;color:var(--text-inverse);white-space:nowrap;cursor:pointer;background:none;border:none;padding:0}
+  .principle-link:hover{text-decoration:underline}
+  @media (max-width:700px){
+    .principle{grid-template-columns:1fr;grid-template-rows:auto auto;gap:var(--s-2)}
+    .principle-link{grid-column:1/-1}
+  }
+
   /* ───── contact ───── */
-  .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
   .contact-wrap h2{font-size:clamp(40px,6vw,68px)}
   .contact-wrap p{margin:18px 0 24px;max-width:460px;font-size:17px;color:var(--text-2)}
   .contact-links{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border)}
-  .contact-link{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:1px solid var(--border);font-family:"Inter";font-size:17px;color:var(--text);transition:padding-left .2s ease}
-  .contact-link .k{font-family:"DM Mono",monospace;font-size:11px;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase}
+  .contact-link{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid var(--border);font-family:"Inter";font-size:17px;color:var(--text);transition:padding-left .2s ease}
+  .contact-link .k{width:70px;flex-shrink:0;font-family:"DM Mono",monospace;font-size:11px;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase}
+  .contact-status{display:inline-flex;align-items:center;gap:8px;font-family:"DM Mono",monospace;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:16px}
+  .contact-status .pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;animation:pulse 2s infinite}
   .contact-link:hover{padding-left:6px}
   .contact-link svg{width:14px;height:14px;stroke:var(--text);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-left:auto;opacity:0.6}
   @media (max-width:820px){.contact-wrap{grid-template-columns:1fr}}
@@ -282,6 +336,8 @@
   /* ───── footer ───── */
   footer{border-top:1px solid var(--border);padding:28px 0}
   .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .foot-brand{font-family:"Fraunces",serif;font-size:13px;font-weight:700;letter-spacing:-0.01em;color:var(--text-dim);opacity:0.7}
+  .foot-links{display:flex;gap:var(--s-4)}
   .foot-inner span,.foot-inner a{font-family:"DM Mono",monospace;font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.12em}
   .foot-inner a:hover{color:var(--text)}
 
@@ -289,36 +345,35 @@
   .modal{position:fixed;inset:0;background:var(--bg);z-index:100;display:none;flex-direction:column;overflow:hidden}
   .modal.open{display:flex}
 
-  /* ───── case study modal (new) ───── */
-  .cs-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:1;cursor:pointer}
-  [data-theme="dark"] .cs-overlay{background:rgba(0,0,0,0.7)}
+  /* ───── case study modal ───── */
   .cs-shell{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;background:var(--bg);overflow:hidden}
   .cs-head{height:56px;flex-shrink:0;display:flex;align-items:stretch;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:3}
-  .cs-head-left{display:flex;align-items:center;gap:14px;padding:0 20px;min-width:0;flex:1}
+  .cs-head-left{display:flex;align-items:center;gap:14px;padding:0 48px;min-width:0;flex:1}
   .cs-ico{width:36px;height:36px;border:1px solid var(--border);border-radius:2px;object-fit:contain;padding:4px;background:var(--bg-card);flex-shrink:0}
   .cs-ico[src=""],.cs-ico:not([src]){visibility:hidden}
   .cs-head-meta{display:flex;flex-direction:column;gap:2px;min-width:0}
-  .cs-co{font-family:"Fraunces",serif;font-weight:700;font-size:16px;color:var(--text);text-transform:uppercase;letter-spacing:0.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cs-co{font-family:"Fraunces",serif;font-weight:700;font-size:16px;color:var(--text);letter-spacing:-0.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .cs-role{font-family:"DM Mono",monospace;font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .cs-head-right{display:flex;align-items:stretch}
-  .cs-hbtn{height:56px;background:transparent;border:none;border-left:1px solid var(--border);font-family:"DM Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);padding:0 18px;display:inline-flex;align-items:center;justify-content:center;transition:background .15s ease}
+  .cs-hbtn{height:56px;background:transparent;border:none;border-left:1px solid var(--border);font-family:"Inter",sans-serif;font-size:var(--t-13);font-weight:500;color:var(--text);padding:0 18px;display:inline-flex;align-items:center;justify-content:center;transition:background .15s ease}
   .cs-hbtn:hover{background:var(--bg-card)}
   .cs-hbtn.icon{width:56px;padding:0}
   .cs-hbtn.icon svg{width:14px;height:14px;stroke:var(--text);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
   .cs-hbtn.hide{display:none}
 
   .cs-tabs{height:44px;background:var(--bg-card);border-bottom:1px solid var(--border);display:flex;align-items:stretch;padding:0 0 0 48px;flex-shrink:0;position:sticky;top:56px;z-index:3}
-  .cs-tab{padding:0 18px;font-family:"DM Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-dim);border:none;background:none;border-bottom:2px solid transparent;cursor:pointer;margin-right:6px}
-  .cs-tab.active{color:var(--text);border-bottom-color:var(--text);font-weight:500}
+  .cs-tab{padding:0 18px;font-family:"Inter",sans-serif;font-size:var(--t-13);font-weight:500;color:var(--text-dim);border:none;background:none;border-bottom:2px solid transparent;cursor:pointer;margin-right:6px}
+  .cs-tab.active{color:var(--text);border-bottom-color:var(--text);font-weight:600}
   .cs-tab:hover{color:var(--text)}
 
   .cs-body{flex:1;overflow-y:auto}
-  .cs-section{max-width:880px;margin:0 auto;padding:52px 48px}
+  .cs-section{max-width:1144px;margin:0 auto;padding:52px 48px}
   .cs-section.hidden{display:none}
   @media (max-width:820px){
     .cs-section{padding:36px 22px}
     .cs-tabs{padding-left:22px}
-    .cs-head-left{padding:0 14px;gap:10px}
+    .cs-head-left{padding:0 22px;gap:10px}
+    .cs-intro{padding:16px 22px}
     .cs-hbtn.txt{padding:0 12px}
     .cs-co{font-size:14px}
     .cs-role{font-size:10px}
@@ -329,19 +384,24 @@
   .cs-h{font-family:"Inter",sans-serif;font-weight:600;font-size:11px;text-transform:uppercase;color:var(--text-dim);border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:14px;letter-spacing:0.1em}
   .cs-blk p{font-size:15px;line-height:1.8;color:var(--text-2);margin-bottom:8px}
   .cs-blk ul{list-style:none;padding:0;margin:8px 0 0}
-  .cs-blk ul li{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:15px;line-height:1.6;color:var(--text-2)}
-  .cs-blk ul li:last-child{border-bottom:none}
+  .cs-blk ul li{display:flex;gap:12px;padding:8px 0;font-size:15px;line-height:1.6;color:var(--text-2)}
   .cs-blk ul li::before{content:"·";font-family:"DM Mono",monospace;color:var(--text-dim);flex-shrink:0;font-size:1.2em}
-
-  .cs-img{border:1px solid var(--border);margin:20px 0;overflow:hidden;border-radius:2px}
-  .cs-img img{width:100%;display:block}
-  .cs-img-cap{font-family:"DM Mono",monospace;font-size:11px;color:var(--text-dim);padding:10px 14px;border-top:1px solid var(--border);background:var(--bg-card);text-transform:uppercase;letter-spacing:0.08em}
 
   .cs-tools{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
   .cs-tool{font-family:"DM Mono",monospace;font-size:11px;color:var(--text-2);border:1px solid var(--border);padding:4px 12px;border-radius:4px;background:var(--bg);text-transform:uppercase;letter-spacing:0.06em}
 
+  .cs-note{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;margin-bottom:16px}
+  .cs-note.cs-note-tight{margin-bottom:0;margin-top:12px;background:transparent;border:none;padding:10px 14px}
+  .cs-note svg{flex-shrink:0;margin-top:1px;opacity:.6}
+  .cs-note span{font-family:"DM Mono",monospace;font-size:var(--t-11);color:var(--text-dim);line-height:1.6;letter-spacing:0.02em}
+
+  .cs-retro{background:var(--bg-card);border:1px solid var(--border);border-radius:2px;padding:var(--s-5);margin-top:var(--s-1)}
+  .cs-retro h4{margin-bottom:var(--s-4)}
+  .cs-retro ul{display:flex;flex-direction:column;gap:10px}
+  .cs-retro li{font-size:var(--t-13);color:var(--text-2);line-height:1.7}
+
   .cs-impact{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:2px;overflow:hidden;margin-top:12px}
-  .cs-ic{background:var(--bg);padding:22px}
+  .cs-ic{background:var(--bg);padding:var(--s-5)}
   .cs-ic h5{font-family:"DM Mono",monospace;font-size:11px;text-transform:uppercase;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:8px;letter-spacing:0.1em;font-weight:500}
   .cs-ic h5 svg{width:13px;height:13px;stroke:var(--text-dim);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
   .cs-ic p{font-size:13px;line-height:1.65;color:var(--text-2);margin:0}
@@ -358,21 +418,62 @@
   .cs-carousel-vp{overflow:hidden}
   .cs-carousel-track{display:flex;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
   .cs-carousel-slide{flex:0 0 100%;min-width:0}
-  .cs-carousel-slide .ratio{aspect-ratio:16/9;width:100%;background:var(--bg-card);display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .cs-carousel-slide img{width:100%;height:100%;object-fit:cover;display:block}
+  .cs-carousel-slide .ratio{aspect-ratio:16/9;width:100%;background:var(--bg-card);display:flex;align-items:flex-start;justify-content:center;overflow:hidden}
+  .cs-carousel-slide img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
   .cs-carousel-ph{display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px;text-align:center}
   .cs-carousel-ph svg{width:32px;height:32px;stroke:var(--text-dim);stroke-width:1;fill:none;stroke-linecap:round;stroke-linejoin:round}
   .cs-carousel-ph span{font-family:"DM Mono",monospace;font-size:11px;color:var(--text-dim);max-width:260px;line-height:1.5;text-transform:uppercase;letter-spacing:0.06em}
   .cs-carousel-cap{font-family:"DM Mono",monospace;font-size:11px;color:var(--text-dim);padding:10px 14px;border-top:1px solid var(--border);background:var(--bg-card);text-transform:uppercase;letter-spacing:0.08em}
   .cs-carousel-nav{position:absolute;top:calc(50% - 30px);transform:translateY(-50%);left:0;right:0;display:flex;justify-content:space-between;padding:0 12px;pointer-events:none;z-index:2}
-  .cs-carousel-prev,.cs-carousel-next{width:36px;height:36px;background:var(--bg);border:1px solid var(--border);border-radius:2px;pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+  .cs-carousel-prev,.cs-carousel-next{position:relative;width:36px;height:36px;background:var(--bg);border:1px solid var(--border);border-radius:2px;pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+  .cs-carousel-prev::before,.cs-carousel-next::before{content:"";position:absolute;inset:-4px}
   .cs-carousel-prev svg,.cs-carousel-next svg{width:14px;height:14px;stroke:var(--text);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
   .cs-carousel-dots{display:flex;justify-content:center;gap:6px;padding:12px;border-top:1px solid var(--border)}
-  .cs-carousel-dot{width:6px;height:6px;border-radius:50%;background:var(--border);cursor:pointer;border:none;padding:0}
+  .cs-carousel-dot{position:relative;width:6px;height:6px;border-radius:50%;background:var(--border);cursor:pointer;border:none;padding:0}
+  .cs-carousel-dot::before{content:"";position:absolute;inset:-19px}
   .cs-carousel-dot.active{background:var(--text)}
   .cs-carousel-expand{position:absolute;top:8px;right:8px;width:28px;height:28px;background:var(--bg);border:1px solid var(--border);border-radius:2px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;z-index:3;opacity:0;transition:opacity .15s}
+  .cs-carousel-expand::before{content:"";position:absolute;inset:-8px}
   .cs-carousel:hover .cs-carousel-expand{opacity:1}
   .cs-carousel-expand svg{width:12px;height:12px;stroke:var(--text);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ─── Intro (persistent, no-scroll header row) ─── */
+  .cs-intro{padding:16px 48px;border-bottom:1px solid var(--border);font-size:var(--t-15);color:var(--text-2);line-height:1.6}
+  .cs-intro:empty{display:none}
+
+  /* ─── Headline numbers, reused inside the Before/Discovery and Impact tabs ─── */
+  .cs-snap-numbers{display:flex;flex-wrap:wrap;gap:28px}
+  .cs-snap-n{min-width:120px}
+  .cs-snap-v{font-family:"Fraunces",serif;font-weight:700;font-size:22px;color:var(--text);line-height:1.1}
+  .cs-snap-l{font-family:"Inter",sans-serif;font-size:var(--t-13);font-weight:500;color:var(--text-dim);margin-top:4px}
+  .cs-snap-d{font-size:var(--t-12);color:var(--text-2);margin-top:3px}
+
+  /* ─── Figma link-out — prominent, Impact tab only ─── */
+  .cs-figma-link{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:11px 18px;border:1px solid var(--border);border-radius:4px;background:var(--bg-card);font-family:"Inter",sans-serif;font-size:var(--t-14);font-weight:600;color:var(--text);transition:border-color .15s ease,transform .15s ease,color .15s ease}
+  .cs-figma-link:hover{border-color:var(--accent);color:var(--accent-dark);transform:translateY(-1px)}
+  .cs-figma-link .cs-figma-icon{width:16px;height:20px;flex-shrink:0}
+  .cs-figma-link .arr{margin-left:1px}
+
+  /* ─── Pivotal decisions (What I Did) ─── */
+  .cs-decisions{display:flex;flex-direction:column;gap:28px;margin-top:12px}
+  .cs-decision{background:transparent;padding:0}
+  .cs-decision-t{font-weight:600;color:var(--text);font-size:14.5px;margin-bottom:6px}
+  .cs-decision-why{font-size:14px;line-height:1.7;color:var(--text-2);margin:0 0 10px}
+  .cs-decision-row{display:flex;gap:10px;padding:8px 0 0;border-top:1px dashed var(--border);font-size:12.5px}
+  .cs-decision-row+.cs-decision-row{border-top:none;padding-top:0}
+  .cs-decision-k{font-family:"Inter",sans-serif;font-size:var(--t-13);font-weight:600;color:var(--text-dim);flex-shrink:0;width:100px}
+  .cs-decision-v{color:var(--text-2);line-height:1.6}
+
+  /* ─── Collapsed process/tools disclosure ─── */
+  .cs-details{margin-top:28px;padding-top:0}
+  .cs-details summary{cursor:pointer;list-style:none}
+  .cs-details summary::-webkit-details-marker{display:none}
+  .cs-details summary::before{content:"+ ";font-family:"DM Mono",monospace;color:var(--text-dim)}
+  .cs-details[open] summary::before{content:"– "}
+  .cs-details ul{list-style:none;padding:0;margin:14px 0 0}
+  .cs-details ul li{padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.6;color:var(--text-2)}
+  .cs-details ul li:last-child{border-bottom:none}
+
   /* Fullscreen overlay */
   .cs-fs-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center}
   .cs-fs-overlay.open{display:flex}
@@ -392,11 +493,24 @@
   .cs-fs-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;border:none;padding:0}
   .cs-fs-dot.active{background:#fff}
 
-  /* legacy modal classes kept (unused) */
-  .modal-head,.modal-tabs,.modal-body,.modal-section,.hbtn,.tab{display:none}
   /* utility */
   .hidden{display:none!important}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:0.001ms!important;animation-iteration-count:1!important;transition-duration:0.001ms!important;scroll-behavior:auto!important}
+  }
+
+  /* Print: a recruiter printing a case study should get a readable document, not a
+     fixed-position, clipped, single-viewport modal. */
+  @media print{
+    body{overflow:visible!important}
+    .nav,.hero,footer,.cs-tabs,.cs-head-right,.cs-carousel-nav,.cs-carousel-dots,.cs-carousel-expand{display:none!important}
+    .modal{position:static!important;display:block!important;height:auto!important;overflow:visible!important}
+    .cs-shell{position:static!important;overflow:visible!important}
+    .cs-body{overflow:visible!important;height:auto!important}
+    .cs-section.hidden{display:block!important}
+  }
 </style>
 </head>
 <body>
@@ -414,6 +528,7 @@
     <div class="nav-right">
       <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
         <svg id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <span class="theme-tip" id="themeTip">Go dark</span>
       </button>
       <a class="cta ghost" id="navCta" href="#contact">Get in touch</a>
       <button class="nav-menu-btn" id="navMenuBtn" aria-label="Open menu" aria-expanded="false">
@@ -433,9 +548,9 @@
 <!-- ═══════ HERO ═══════ -->
 <section id="main-content" class="hero">
   <div class="wrap hero-inner">
-    <div class="eyebrow">Senior Product Designer · UX Engineer · Barcelona</div>
+    <div class="eyebrow">Senior Product Designer · UX Engineer</div>
     <h1>I design it.<br/>I build it.</h1>
-    <p class="hero-desc">15+ years shipping data-heavy interfaces that move real metrics across fintech, cybersecurity, enterprise B2B. I close the gap between design and production.</p>
+    <p class="hero-desc">15+ years shipping data-heavy interfaces and building the design practices around them from zero, in complex, regulated environments.</p>
     <a class="hero-cta" href="#works">View case studies
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
     </a>
@@ -457,25 +572,23 @@
   </div>
 </section>
 
+<!-- ═══════ PRINCIPLES ═══════ -->
 <!-- ═══════ ABOUT ═══════ -->
 <section id="about" class="inverse">
   <div class="about-top">
     <div class="eyebrow">About</div>
-    <h2>Who I am, what I do</h2>
-    <p>I design and build, working end-to-end across the full delivery cycle, from problem framing through front-end delivery. I close the gap between design intent and shipped product directly.</p>
-    <p>I work with <strong>multiple stakeholders</strong>: product, engineering, operations, compliance, customer success, and enterprise clients, to align on the real problem before designing anything. The design challenge is almost always a communication challenge first.</p>
-    <p><strong>I turn complex data into insights for decision-makers.</strong> Whether that is institutional traders making go/no-go calls in four minutes, security analysts triaging live threats, or operations teams tracking compliance. I design the interface between data and the decision.</p>
-    <div style="margin-top:32px;padding-top:32px;border-top:1px solid var(--border-inverse);display:flex;gap:40px;flex-wrap:wrap">
-      <div><span style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-inverse-dim);display:block;margin-bottom:6px">Specialisation</span><span style="color:var(--text-inverse);font-size:14px">Fintech · Cybersecurity · AI · Enterprise B2B</span></div>
-      <div><span style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-inverse-dim);display:block;margin-bottom:6px">Stack</span><span style="color:var(--text-inverse);font-size:14px">Figma · React · TypeScript · Storybook</span></div>
-      <div><span style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-inverse-dim);display:block;margin-bottom:6px">Based in</span><span style="color:var(--text-inverse);font-size:14px">Barcelona, Spain · Open to remote</span></div>
-      <div><span style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-inverse-dim);display:block;margin-bottom:6px">Standards</span><span style="color:var(--text-inverse);font-size:14px">WCAG 2 AA</span></div>
+    <h2>Who I am, how I decide</h2>
+    <p>I design and build end-to-end, from problem framing to shipped product, aligning stakeholders who rarely agree so the interface between data and decision stays legible under pressure.</p>
+    <div class="principles" id="principlesList"><!-- injected --></div>
+    <div class="about-meta">
+      <div><span class="about-meta-k">Specialisation</span><span class="about-meta-v">Fintech · Cybersecurity · AI · Enterprise B2B</span></div>
+      <div><span class="about-meta-k">Standards</span><span class="about-meta-v">WCAG 2 AA</span></div>
     </div>
   </div>
 </section>
 
 <!-- ═══════ SKILLS ═══════ -->
-<section id="skills" class="section" style="padding-top:40px">
+<section id="skills" class="section">
   <div class="wrap">
     <div class="section-head">
       <div class="left">
@@ -512,7 +625,7 @@
         <div class="eyebrow">Experience</div>
         <h2>Where I've worked</h2>
       </div>
-      <div class="count">2011–2025</div>
+      <div class="count">2011–present</div>
     </div>
     <div class="exp" id="expList"></div>
   </div>
@@ -524,22 +637,22 @@
     <div>
       <div class="eyebrow">Contact</div>
       <h2>Let's work together</h2>
-      <p style="display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:16px"><span style="width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;animation:pulse 2s infinite"></span>Available now</p>
+      <p class="contact-status"><span class="pulse-dot"></span>Available now</p>
       <p>Open to Senior Product Designer, UX Engineer, and Lead or Staff-level design roles in FinTech, cybersecurity, AI, and enterprise B2B.<br>Based in Barcelona, Spain, open to remote.</p>
     </div>
     <div class="contact-links">
-      <a class="contact-link" href="mailto:belenibanezm@gmail.com" style="gap:20px">
-        <span class="k" style="width:70px">Email</span>
+      <a class="contact-link" href="mailto:belenibanezm@gmail.com" data-track="email_click">
+        <span class="k">Email</span>
         <span>belenibanezm@gmail.com</span>
         <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg>
       </a>
-      <a class="contact-link" href="https://linkedin.com/in/belenibanez" target="_blank" rel="noopener" style="gap:20px">
-        <span class="k" style="width:70px">LinkedIn</span>
+      <a class="contact-link" href="https://linkedin.com/in/belenibanez" target="_blank" rel="noopener" data-track="linkedin_click">
+        <span class="k">LinkedIn</span>
         <span>linkedin.com/in/belenibanez</span>
         <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg>
       </a>
-      <a class="contact-link" href="cases/Belen_Ibanez_CV.pdf" download style="gap:20px">
-        <span class="k" style="width:70px">CV</span>
+      <a class="contact-link" href="cases/Belen_Ibanez_CV.pdf" download data-track="cv_download">
+        <span class="k">CV</span>
         <span>Download CV (PDF)</span>
         <svg viewBox="0 0 24 24"><path d="M12 4v12M6 12l6 6 6-6M5 20h14"/></svg>
       </a>
@@ -549,112 +662,16 @@
 
 <footer>
   <div class="wrap foot-inner">
-    <span style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;letter-spacing:-0.01em;text-transform:none;color:var(--text-dim);opacity:0.7">Belén Ibáñez</span>
-    <div style="display:flex;gap:18px">
-      <a href="https://linkedin.com/in/belenibanez" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:belenibanezm@gmail.com">Email</a>
+    <span class="foot-brand">Belén Ibáñez</span>
+    <div class="foot-links">
+      <a href="https://linkedin.com/in/belenibanez" target="_blank" rel="noopener" data-track="linkedin_click">LinkedIn</a>
+      <a href="mailto:belenibanezm@gmail.com" data-track="email_click">Email</a>
     </div>
   </div>
 </footer>
 
-<!-- ═══════ TWEAKS PANEL ═══════ -->
-<div id="tweaksPanel" style="display:none;position:fixed;bottom:20px;right:20px;z-index:200;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:18px;width:280px;font-family:'Instrument Sans',sans-serif;color:var(--text);box-shadow:0 0 0 1px var(--border)">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <span style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-dim)">Tweaks</span>
-  </div>
-  <div style="margin-bottom:14px">
-    <label style="font-family:'DM Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim);display:block;margin-bottom:6px">Process line</label>
-    <div id="lineModeBtns" style="display:flex;gap:6px;flex-wrap:wrap">
-      <button data-mode="full" style="flex:1;padding:8px 10px;border:1px solid var(--border);background:var(--bg-card);border-radius:4px;font-family:'DM Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text);cursor:pointer">Full</button>
-      <button data-mode="centers" style="flex:1;padding:8px 10px;border:1px solid var(--border);background:var(--bg-card);border-radius:4px;font-family:'DM Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text);cursor:pointer">Problem → Validate</button>
-      <button data-mode="to-edge" style="flex:1;padding:8px 10px;border:1px solid var(--border);background:var(--bg-card);border-radius:4px;font-family:'DM Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text);cursor:pointer">Ends at Validate edge</button>
-      <button data-mode="inset" style="flex:1;padding:8px 10px;border:1px solid var(--border);background:var(--bg-card);border-radius:4px;font-family:'DM Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text);cursor:pointer">Inset</button>
-    </div>
-  </div>
-  <div>
-    <label style="font-family:'DM Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim);display:block;margin-bottom:6px">Line opacity</label>
-    <input id="lineOpacity" type="range" min="0" max="1" step="0.05" style="width:100%"/>
-  </div>
-</div>
-
-<script>
-(function(){
-  const TWEAKS = /*EDITMODE-BEGIN*/{
-    "lineMode": "to-edge",
-    "lineOpacity": 0.25
-  }/*EDITMODE-END*/;
-
-  const state = {...TWEAKS};
-
-  function apply(){
-    // 8 columns, gap 18px. Each col width = (100% - 7*18px)/8. Icon is 38px (center at col_start + 19px).
-    // Line Y sits at center of icons (top:19px in CSS).
-    let left = "19px", right = "19px"; // centers mode: icon center to icon center
-    if (state.lineMode === "full") { left = "0px"; right = "0px"; }
-    else if (state.lineMode === "inset") { left = "calc(100%/16)"; right = "calc(100%/16)"; }
-    else if (state.lineMode === "to-edge") {
-      // Ends where Validate (last) icon starts, left edge of column 8.
-      // Right edge = last col width. Col width = (100% - 7*18px)/8
-      left = "19px";
-      right = "calc((100% - 126px) / 8)";
-    }
-    document.documentElement.style.setProperty("--line-left", left);
-    document.documentElement.style.setProperty("--line-right", right);
-    const styleId = "tweakLineStyle";
-    let st = document.getElementById(styleId);
-    if (!st){ st = document.createElement("style"); st.id = styleId; document.head.appendChild(st); }
-    const op = state.lineOpacity;
-    st.textContent = `
-      .process-grid::before{background:rgba(255,255,255,${op})!important}
-      [data-theme="dark"] .process-grid::before{background:rgba(0,0,0,${op})!important}
-    `;
-    document.querySelectorAll("#lineModeBtns button").forEach(b=>{
-      const active = b.dataset.mode === state.lineMode;
-      b.style.background = active ? "var(--text)" : "var(--bg-card)";
-      b.style.color = active ? "var(--bg)" : "var(--text)";
-      b.style.borderColor = active ? "var(--text)" : "var(--border)";
-    });
-    const op_el = document.getElementById("lineOpacity");
-    if (op_el) op_el.value = state.lineOpacity;
-  }
-
-  function persist(edits){
-    try { window.parent.postMessage({type:'__edit_mode_set_keys', edits}, '*'); } catch(e){}
-  }
-
-  window.addEventListener("message", (e) => {
-    const d = e.data || {};
-    if (d.type === "__activate_edit_mode"){
-      document.getElementById("tweaksPanel").style.display = "block";
-    } else if (d.type === "__deactivate_edit_mode"){
-      document.getElementById("tweaksPanel").style.display = "none";
-    }
-  });
-
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll("#lineModeBtns button").forEach(b=>{
-      b.addEventListener("click", () => {
-        state.lineMode = b.dataset.mode;
-        apply();
-        persist({lineMode: state.lineMode});
-      });
-    });
-    document.getElementById("lineOpacity").addEventListener("input", (ev) => {
-      state.lineOpacity = parseFloat(ev.target.value);
-      apply();
-    });
-    document.getElementById("lineOpacity").addEventListener("change", () => {
-      persist({lineOpacity: state.lineOpacity});
-    });
-    apply();
-    try { window.parent.postMessage({type:'__edit_mode_available'}, '*'); } catch(e){}
-  });
-})();
-</script>
-
 <!-- ═══════ MODAL ═══════ -->
 <div class="modal" id="caseModal" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="cs-overlay" id="csOverlay"></div>
   <div class="cs-shell">
     <div class="cs-head">
       <div class="cs-head-left">
@@ -672,18 +689,920 @@
         </button>
       </div>
     </div>
-    <div class="cs-tabs">
-      <button class="cs-tab active" data-tab="overview">Overview</button>
-      <button class="cs-tab" data-tab="process">Process</button>
-      <button class="cs-tab" data-tab="screens">Outcome + Screens</button>
+    <div class="cs-intro" id="csIntro"></div>
+    <div class="cs-tabs" role="tablist">
+      <button class="cs-tab active" role="tab" aria-selected="true" aria-controls="cs-before" id="cs-tab-before" data-tab="before">Before / Discovery</button>
+      <button class="cs-tab" role="tab" aria-selected="false" aria-controls="cs-whatidid" id="cs-tab-whatidid" data-tab="whatidid">What I Did</button>
+      <button class="cs-tab" role="tab" aria-selected="false" aria-controls="cs-afterimpact" id="cs-tab-afterimpact" data-tab="afterimpact">Outcome + Impact</button>
     </div>
     <div class="cs-body" id="csBody">
-      <div class="cs-section" id="cs-overview"></div>
-      <div class="cs-section hidden" id="cs-process"></div>
-      <div class="cs-section hidden" id="cs-screens"></div>
+      <div class="cs-section" id="cs-before" data-tab="before" role="tabpanel" aria-labelledby="cs-tab-before"></div>
+      <div class="cs-section hidden" id="cs-whatidid" data-tab="whatidid" role="tabpanel" aria-labelledby="cs-tab-whatidid"></div>
+      <div class="cs-section hidden" id="cs-afterimpact" data-tab="afterimpact" role="tabpanel" aria-labelledby="cs-tab-afterimpact"></div>
     </div>
   </div>
 </div>
+
+
+<script>
+// ───── BOFA "BEFORE" REPRESENTATIVE RECONSTRUCTION ─────
+// Rebuilt with real app chrome (header bar, page title, labeled filter row,
+// account info strip) so it reads as an actual legacy screen rather than a
+// floating component — still deliberately plain and dated next to the
+// tokenised After state. Concept mockup, not the actual product, anonymized data.
+const BOFA_BEFORE_SCREENS = (() => {
+  const INK='#26282b', SUB='#6b6f76', LINE='#d8dade', BG='#f2f2f3', G='#1f8a4c', R='#c23b2a', NAVY='#1c2b3f';
+  const entities = [
+    {name:'MLI', status:'gtt', rules:[['AML/KYC','g','—'],['Dodd-Frank / EMIR','g','—'],['Suitability','g','—'],['Credit limit','g','—'],['Legal entity','g','—']]},
+    {name:'BKNA', status:'ngtt', rules:[['AML/KYC','r','NGTT_RSN_12C'],['Dodd-Frank / EMIR','g','—'],['Suitability','g','—'],['Credit limit','g','—'],['Legal entity','r','NGTT_RSN_55D']]},
+    {name:'BAMLI DAC', status:'ngtt', open:true, rules:[['AML/KYC','g','—'],['Dodd-Frank / EMIR','r','NGTT_RSN_47A'],['Suitability','g','—'],['Credit limit','g','—'],['Legal entity','g','—']]},
+    {name:'MLCI', status:'ngtt', rules:[['AML/KYC','g','—'],['Dodd-Frank / EMIR','g','—'],['Suitability','r','NGTT_RSN_08B'],['Credit limit','g','—'],['Legal entity','g','—']]},
+    {name:'MLJS', status:'gtt', rules:[['AML/KYC','g','—'],['Dodd-Frank / EMIR','g','—'],['Suitability','g','—'],['Credit limit','g','—'],['Legal entity','g','—']]}
+  ];
+  const field = (label,value) => `<div style="flex:1;min-width:0"><div style="font-size:10.5px;color:${SUB};margin-bottom:5px">${label}</div><div style="border:1px solid ${LINE};border-radius:4px;background:#fff;padding:9px 12px;font-size:13.5px;color:${INK};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${value}</div></div>`;
+  const info = (label,value) => `<div><span style="font-size:10px;color:${SUB};display:block;margin-bottom:2px">${label}</span><span style="font-size:12.5px;color:${INK};font-weight:600">${value}</span></div>`;
+  const rowHtml = (r) => `<div style="display:flex;align-items:baseline;padding:9px 0;font-size:14px;border-top:1px solid ${LINE}">
+    <span style="width:170px;flex:none;color:${INK}">${r[0]}</span>
+    <span style="width:90px;flex:none;font-weight:600;color:${r[1]==='g'?G:R}">${r[1]==='g'?'GTT':'NGTT'}</span>
+    <span style="font-family:'Courier New',Courier,monospace;font-size:13px;color:${SUB}">${r[2]!=='—'?r[2]:''}</span>
+  </div>`;
+  const entityHtml = (e) => `<div style="flex-shrink:0;border:1px solid ${LINE};border-radius:6px;background:#fff;box-shadow:0 1px 2px rgba(20,20,30,0.05);overflow:hidden">
+    <div style="display:flex;align-items:center;padding:14px 18px;border-left:3px solid ${e.status==='gtt'?G:R}">
+      <span style="font-size:15px;font-weight:600;width:170px;flex:none;color:${INK}">${e.name}</span>
+      <span style="font-size:12px;font-weight:700;letter-spacing:0.03em;padding:3px 9px;border-radius:3px;color:#fff;background:${e.status==='gtt'?G:R}">${e.status==='gtt'?'GTT':'NGTT'}</span>
+      <span style="margin-left:auto;font-size:15px;color:${SUB};display:inline-block;transform:rotate(${e.open?180:0}deg)">⌄</span>
+    </div>
+    ${e.open ? `<div style="padding:0 18px 12px">${e.rules.map(rowHtml).join('')}</div>` : ''}
+  </div>`;
+  const s1 = () => `<div style="width:100%;aspect-ratio:16/9;background:${BG};color:${INK};font-family:Arial,Helvetica,sans-serif;font-size:14px;overflow:hidden;display:flex;flex-direction:column">
+    <div style="flex-shrink:0;background:${NAVY};padding:0 22px;height:42px;display:flex;align-items:center;gap:22px">
+      <span style="color:#fff;font-weight:700;font-size:14px;letter-spacing:0.01em">GTT Portal</span>
+      <span style="color:rgba(255,255,255,0.55);font-size:11.5px">Bulk Export</span>
+      <span style="color:rgba(255,255,255,0.55);font-size:11.5px">Training &amp; Docs</span>
+      <span style="color:rgba(255,255,255,0.55);font-size:11.5px">Trading Guides</span>
+      <span style="margin-left:auto;color:rgba(255,255,255,0.75);font-size:11.5px">Ops User</span>
+      <span style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.25);flex-shrink:0"></span>
+    </div>
+    <div style="flex:1;overflow:hidden;padding:20px 24px;display:flex;flex-direction:column;min-height:0">
+      <div style="max-width:900px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:14px;flex:1;min-height:0">
+        <div style="display:flex;gap:14px;align-items:flex-end;flex-shrink:0">
+          ${field('Account / Party','Account number 1')}
+          <div style="flex-shrink:0">
+            <div style="font-size:10.5px;color:${SUB};margin-bottom:5px">Product</div>
+            <div style="display:flex;border:1px solid ${LINE};border-radius:4px;overflow:hidden">
+              <span style="padding:9px 14px;font-size:12.5px;background:${NAVY};color:#fff;letter-spacing:0.02em">MiFID</span>
+              <span style="padding:9px 14px;font-size:12.5px;background:#fff;color:${SUB};letter-spacing:0.02em;border-left:1px solid ${LINE}">Equities</span>
+              <span style="padding:9px 14px;font-size:12.5px;background:#fff;color:${SUB};letter-spacing:0.02em;border-left:1px solid ${LINE}">Derivatives</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:20px;flex:1;min-height:0">
+          <aside style="flex-shrink:0;width:170px;border:1px solid ${LINE};border-radius:6px;background:#fff;box-shadow:0 1px 2px rgba(20,20,30,0.05);padding:16px;display:flex;flex-direction:column;gap:14px;overflow:hidden">
+            <div style="font-size:12.5px;font-weight:700;color:${INK};padding-bottom:10px;border-bottom:1px solid ${LINE}">Client Reference Data</div>
+            ${info('LEI','549300N2Y0—')}
+            ${info('Legal entity status','Active')}
+            ${info('Primary brokerage','—')}
+            ${info('Country of incorporation','United States')}
+          </aside>
+          <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;gap:12px;min-height:0">${entities.map(entityHtml).join('')}</div>
+        </div>
+      </div>
+    </div>
+    <p style="max-width:900px;margin:0 auto;padding:12px 0;text-align:center;color:${SUB};font-size:10.5px;font-family:'Courier New',monospace;letter-spacing:0.04em;flex-shrink:0">LEGACY GTT, RECONSTRUCTION · EACH ENTITY MUST BE EXPANDED INDIVIDUALLY · CODES REQUIRE A SEPARATE LOOKUP</p>
+  </div>`;
+  return [s1()];
+})();
+</script>
+
+<script>
+// ───── SOCKET (ADARMA) REPRESENTATIVE RECONSTRUCTION ─────
+// Concept rebuild of an analyst view: KPI row, alert→incident funnel, and incident
+// queue. Illustrative, anonymized data.
+const SOCKET_SCREENS = (() => {
+  const B='#0B0F14',S='rgba(255,255,255,0.05)',BR='rgba(255,255,255,0.09)',T='#E2EAF4',D='rgba(226,234,244,0.7)';
+  const G='#22C55E',R='#EF4444',A='#F59E0B',BL='#60A5FA';
+  const sevColor = {Critical:R, High:R, Medium:A, Low:G};
+  const incidents = [
+    {id:'INC-2417', title:'Credential stuffing, VPN gateway', sev:'Critical', owner:'A. Ferro · Tier 2', sla:'-14m', slaColor:R, status:'Containing'},
+    {id:'INC-2416', title:'Lateral movement flagged, finance segment', sev:'Critical', owner:'M. Okafor · Tier 2', sla:'32m', slaColor:A, status:'Investigating'},
+    {id:'INC-2415', title:'Malware quarantined, endpoint fleet', sev:'High', owner:'J. Lindqvist · Tier 1', sla:'2.1h', slaColor:G, status:'Investigating'},
+    {id:'INC-2413', title:'Impossible travel, exec mailbox', sev:'High', owner:'Unassigned · routing', sla:'48m', slaColor:A, status:'Triage'}
+  ];
+  const s1 = () => `<div style="width:100%;aspect-ratio:16/9;background:${B};display:flex;flex-direction:column;font-family:system-ui,sans-serif;overflow:hidden">
+    <div style="padding:11px 16px;border-bottom:1px solid ${BR};display:flex;align-items:center;gap:12px">
+      <span style="font-size:13px;color:${T};font-weight:700;letter-spacing:-0.01em">Socket</span>
+      <span style="font-size:9px;color:${D};text-transform:uppercase;letter-spacing:0.06em">Security operations · incident monitoring</span>
+      <div style="margin-left:auto;display:flex;border:1px solid ${BR};border-radius:4px;overflow:hidden">
+        ${['Analyst','Posture','Vulnerabilities'].map((r,i)=>`<span style="padding:5px 10px;font-size:8.5px;color:${i===0?'#fff':D};background:${i===0?BL:'transparent'};text-transform:uppercase;letter-spacing:0.05em;font-weight:600">${r}</span>`).join('')}
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px 14px">
+      ${[['Open incidents','47','▲ 6 vs yesterday',R],['MTTA','8m','▼ 2m vs 30-day avg',G],['MTTR','3.2h','▼ 0.4h vs 30-day avg',G],['SLA compliance','96%','Target 95%',G]].map(([k,v,d,c])=>`
+        <div style="background:${S};border:1px solid ${BR};border-radius:5px;padding:9px 11px">
+          <div style="font-size:8px;color:${D};text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px">${k}</div>
+          <div style="font-size:16px;color:${T};font-weight:700">${v}</div>
+          <div style="font-size:8px;color:${c};margin-top:2px;font-family:'DM Mono',monospace">${d}</div>
+        </div>`).join('')}
+    </div>
+    <div style="display:grid;grid-template-columns:220px 1fr;gap:10px;padding:0 14px 12px;flex:1;min-height:0">
+      <div style="background:${S};border:1px solid ${BR};border-radius:5px;padding:10px;display:flex;flex-direction:column;gap:7px">
+        <span style="font-size:8px;color:${D};text-transform:uppercase;letter-spacing:0.06em">Alert → incident, 24h</span>
+        ${[['1,240','Alerts ingested',BL,'100%'],['312','Correlated','#3a6294','72%'],['47','Incidents raised','#4e77a5','38%']].map(([v,l,c,w])=>`
+          <div style="border-radius:5px;padding:6px 9px;background:${c};width:${w};font-family:'DM Mono',monospace">
+            <div style="font-size:11px;color:#fff;font-weight:700">${v}</div>
+            <div style="font-size:8px;color:rgba(255,255,255,0.85);text-transform:uppercase;letter-spacing:0.05em">${l}</div>
+          </div>`).join('')}
+      </div>
+      <div style="background:${S};border:1px solid ${BR};border-radius:5px;padding:10px;overflow:hidden">
+        <span style="font-size:8px;color:${D};text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:7px">Incident queue · priority order</span>
+        ${incidents.map(i=>`
+          <div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid ${BR};font-size:9px">
+            <span style="font-family:'DM Mono',monospace;color:${D};width:64px;flex:none">${i.id}</span>
+            <span style="color:${T};flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${i.title}</span>
+            <span style="font-family:'DM Mono',monospace;font-size:8px;text-transform:uppercase;font-weight:600;color:${sevColor[i.sev]};width:44px;flex:none">${i.sev}</span>
+            <span style="color:${D};width:110px;flex:none;font-size:8.5px">${i.owner}</span>
+            <span style="font-family:'DM Mono',monospace;font-weight:600;color:${i.slaColor};width:34px;flex:none;text-align:right">${i.sla}</span>
+          </div>`).join('')}
+      </div>
+    </div>
+    <div style="padding:7px 14px;border-top:1px solid ${BR};text-align:center;font-family:'DM Mono',monospace;font-size:8px;color:${D};text-transform:uppercase;letter-spacing:0.06em">Concept rebuild · anonymized data · role-aware: analyst triage, CISO posture, vulnerability management</div>
+  </div>`;
+  return [s1()];
+})();
+</script>
+
+<script>
+// ───── CASE ORDER ─────
+// Chronological, most recent first (matches each case's own `idx` field,
+// 01/07–07/07): Bank of America (2024–25) → Adarma (2023–24) → SilicoAI (2020–23)
+// → PSA/Peugeot and Highland (Band of Coders, ~2019–21) → Emerios (2013–17, oldest)
+// → More Works (undated, exempt from the arc, always last).
+window.CASES_DATA = window.CASES_DATA || {};
+window.CASE_ORDER = ['bofa', 'adarma', 'silico', 'psa', 'highland', 'emerios', 'more'];
+</script>
+<script>
+// ───── CASE CONTENT · Bank of America ─────
+window.CASES_DATA.bofa = {
+  // ── identity (unchanged) ──
+  title: "Bank Of America",
+  role: "Senior UX Engineer · Sep 2024–Dec 2025",
+  icon: "cases/bofa-icon.svg",
+  idx: "01/07",
+  company: "Bank of America",
+  range: "2024–2025",
+  cardTitle: "Good-to-trade portal for institutional trading",
+  tags: ["FinTech", "Compliance UX", "Data Visualisation", "Multi-Stakeholder"],
+  visual: "gtt",
+  // Level-1 Works-grid tile image — a real screenshot of the Figma design (GTT
+  // Portal matrix, node-id=24-45 in the same file linked from after.figma below).
+  tileImage: "cases/bofa-gtt-matrix.png",
+
+  // Level-1 Works-grid one-line before→after statement. Built only from facts
+  // stated elsewhere in this file — not new information.
+  shift: "Redesigned the Good-to-Trade (GTT) compliance portal end-to-end, making the product taxonomy simpler and AML/KYC rule logic easier to understand across legal entities. Reduced decision time from 12 to 4 minutes while working closely with Front Office, Operations, and Compliance.",
+
+  // Level-1 headline metric (unchanged)
+  outcome: "67% reduction in go/no-go decision time",
+
+  // Why the business cared, in money/risk terms — rendered near the Snapshot.
+  stake: "Trader minutes spent on blocked accounts are a direct cost, and every unresolved block is compliance exposure sitting on the desk. The project had front-office MD sponsorship from the outset.",
+
+  // (a) SNAPSHOT — always visible, no scrolling. 2–3 sharpest numbers.
+  snapshot: {
+    numbers: [
+      { value: "67%", label: "Faster go/no-go decisions", detail: "~12 min → ~4 min" },
+      { value: "47+", label: "Opaque codes clarified", detail: "NGTT reason codes → plain language" },
+      { value: "3", label: "Stakeholder groups unified", detail: "Front office, Ops, Compliance → one portal" }
+    ]
+  },
+
+  // (b) BEFORE — inherited problems (deck slide 3, "One account, multiple legal
+  // entities, one question: good to trade?")
+  before: {
+    problems: [
+      "Answering took ~12 minutes per account, checking each booking entity one by one",
+      "Status fragmented across separate AML, KYC, and regulatory systems — no roll-up view existed",
+      "Traders had to select product by product to see an account's status. No view existed across products",
+      "Blocks surfaced as opaque codes, each needing a separate lookup to decode",
+      "No owner and no escalation path on any block — finding who could fix it was its own investigation",
+      "Three user groups pulling in different directions: Front Office needs speed, Ops needs ownership, Compliance needs evidence"
+    ],
+    forWhom: "Front-office traders, operations managers, and compliance reviewers",
+    whyItMattered: "Traders had no quick way to see an account's status — every check meant working through booking entities and products one at a time before they could even start deciding. Operations teams were equally stuck: a blocked account with no clear owner or escalation path became its own investigation, with no remediation path to point to.<br><br>When I joined, the starting point was a brief and a Balsamiq wireframe scoped around cutting clicks. I pushed to meet traders, operations, and compliance directly before building anything — their own feedback was \"too many clicks.\" Watching them work showed the real problem wasn't the click count. It was the lack of a quick view into how an account was actually doing.",
+    // Reconstruction of the legacy accordion pattern (deck slide 4): one accordion
+    // per legal entity, status hidden until expanded, reasons shown as raw internal
+    // codes only, no plain-language decoding, no roll-up across entities.
+    screenshots: [
+      { html: BOFA_BEFORE_SCREENS[0], cap: "Legacy accordion view, reconstruction — one legal entity expanded at a time, reasons shown as raw codes only" }
+    ],
+    figma: null
+  },
+
+  // (c) WHAT I DID — pivotal decisions (deck slides 5, 5b, 8 + Appendix A1)
+  decisions: [
+    {
+      title: "Chose a rule-by-entity matrix over an accordion or query-first flow",
+      why: "Shadowing traders during live hours and interviewing compliance SMEs across all three user groups surfaced the real finding: the data existed, nobody could read it fast enough to act — a legibility problem, not a data problem. Users asked for plain-language reasons, a clear owner for every block, and account context next to the status. The matrix answers all three: rules as rows, legal entities as columns, exceptions loud, passes quiet, with progressive disclosure — glance, then inspector, then history.",
+      tradeoff: "Killed an \"Accordion, restyled\" concept (the old model with better paint — status still assembled one entity expansion at a time) and a \"query-first\" concept (pick entity and product before seeing anything — kept the old product-by-product fragmentation). Both were faster to build than the matrix but preserved the exact problem being solved.",
+      stakeholders: "Front-office traders, operations managers, compliance reviewers, product leadership"
+    },
+    {
+      title: "Auto-selected main booking entities and default products",
+      why: "So the high-level picture of an account appears at a glance, instead of requiring traders to configure a view before seeing anything — the same fast read the matrix decision was built to protect.",
+      tradeoff: "Specialists have to override the filters for edge cases; everyone else never touches them. Accepted that extra step for the few in exchange for zero-configuration speed for the many."
+    },
+    {
+      title: "Mapped 47+ opaque NGTT codes to plain language",
+      why: "Internal codes like NGTT_RSN_47A required a secondary lookup just to understand why an account was blocked. The plain-language taxonomy was validated directly with traders and compliance so no one needed a decoder — covering every rule and regulation category, including Dodd-Frank, EMIR, and MiFID classifications.",
+      stakeholders: "Traders and compliance SMEs"
+    },
+    {
+      title: "Extended Helix with a primitives/semantic token architecture",
+      why: "Helix, the bank's Figma design system, had grown mostly around the commercial and retail side. GTT needed enterprise-grade, compliance-specific patterns (status badges, plain-language reason strings) built on a token layer where primitives (raw values only — color ramps, spacing, type scale) stay separate from semantic aliases (bg, text, border, status, interactive states) that actually get applied to components.",
+      tradeoff: "The split paid off directly: three primitives were darkened for WCAG 2 AA contrast, and all 61 components inherited the fix without a single manual edit. The cost is the upfront discipline of never applying a primitive straight to a screen.",
+      figma: "https://www.figma.com/design/HY2TpLXxvNUAIlDMbUqH10/Past-Works-Concepts?node-id=14-108",
+      figmaLabel: "reconstructed design system (portfolio recreation, not the real Helix file)"
+    }
+  ],
+
+  // Influence: the real tension and how alignment was won — a short passage, not a
+  // stakeholder list.
+  influence: "The real tension was between front office, operations, and compliance — front office wanted speed, operations wanted ownership, compliance wanted evidence, and the role required aligning all three, not picking a side. The project had front-office MD sponsorship, but sponsorship alone doesn't resolve competing needs. The settlement that won alignment: traders get a fast, at-a-glance read, and when thoroughness is required, operational and compliance users can deep-dive. That's exactly why the matrix auto-selects main booking entities and default products for a glance-first view, with progressive disclosure underneath for whoever needs to go deeper.",
+
+  // (d) AFTER — shipped result (deck slides 7, 8)
+  after: {
+    summary: "A single compliance matrix replaced three disconnected tools: accounts, booking entities, and products became selectable inputs, with rules as rows and legal-entity markets as columns (MLI, BAMLI, DAC, BKNA, MLCI, MLJS). Status reads inline — a green check for GTT, a red cross with a plain-language reason for NGTT, or an amber warning — and column headers show overall trading status per entity at a glance. The whole matrix runs on one taxonomy that matches how front office, operations, and compliance actually think about restrictions.",
+    screenshots: [
+      { img: "cases/bofa-gtt-matrix.png", cap: "Compliance matrix, GTT / NGTT / amber status by rule and legal entity" },
+      { img: "cases/bofa-gtt-detail.png", cap: "NGTT restriction detail, plain-language reason and escalation path" }
+    ],
+    disclaimer: "Representative concept mockups — not screenshots of the actual Bank of America product. The linked Figma file below is also a reconstruction built for this portfolio, not the bank's real design file. Anonymized data throughout.",
+    figma: "https://www.figma.com/design/HY2TpLXxvNUAIlDMbUqH10/Past-Works-Concepts?node-id=24-45",
+    figmaLabel: "reconstructed after state (portfolio recreation, not the real Bank of America file)"
+  },
+
+  // (e) IMPACT — metrics first, then qualitative (deck slide 9)
+  impact: {
+    metrics: [
+      ["Decision Speed", "Average go/no-go time dropped from ~12 to ~4 minutes, 67% reduction. Traders stopped needing secondary lookups for blocked accounts."],
+      ["Taxonomy Clarity", "47+ opaque internal codes (e.g. NGTT_RSN_47A) replaced with plain-language reasons across every rule and regulation category. Compliance SMEs confirmed zero training overhead on the new system."],
+      ["Scope Expansion", "The result earned continued investment: the portal's scope expanded into the operational side, from reading status to acting on it."],
+      ["Design System", "Compliance-specific token set and component patterns merged into Helix, contributing enterprise-grade components to a library that had grown mostly around the commercial and retail side. Two adjacent trading teams adopted the patterns within 3 months of launch."],
+      ["Stakeholder Alignment", "Three distinct user profiles, front-office traders, operations managers, compliance reviewers, consolidated into one portal. Eliminated the previous three-tool workflow."]
+    ],
+    caveat: "Measured from system logs — the signal available to us was time-to-decision, not a controlled study. Proper instrumentation would be the next step.",
+    qualitative: [
+      "I'd push earlier for quantified SLA data from Ops before the design phase. We had qualitative signal but the 12-minute baseline came late, having it in week one would have sharpened the IA decisions.",
+      "The compliance matrix works well for desktop. I deprioritised mobile because traders work at desks, but operations managers sometimes need to act remotely. I'd scope a responsive variant sooner.",
+      "I killed the form-heavy approach in round two, but I should have stress-tested it with a compliance reviewer first. The data told the same story, but having the user session as evidence would have accelerated sign-off."
+    ],
+    qualitativeTitle: "What I'd do differently"
+  },
+
+  // secondary/collapsed process artifacts — shown collapsed under "What I Did"
+  process: {
+    steps: [
+      ["Discovery", "Shadowed traders during live trading hours. Structured interviews with compliance SMEs to map all rule categories and exception flows"],
+      ["Definition", "Taxonomy audit, mapped 47+ NGTT reason codes to plain-language equivalents. Validated with traders and compliance"],
+      ["Exploration", "Multiple IA approaches for the compliance matrix. Killed an accordion-restyled concept and a query-first concept, both of which preserved the old fragmentation"],
+      ["Systemisation", "Extended Helix design system with compliance-specific tokens, primitives separated from semantic aliases, specified for engineering handoff"],
+      ["Validation", "Task-based walkthroughs with FO traders (speed), operations managers (ownership), and compliance reviewers (evidence)"]
+    ],
+    tools: ["Figma", "Material Design", "Accessibility (WCAG 2.2)"]
+  },
+
+  timeline: [
+    ["Sep–Oct 2024", "Discovery, trader shadowing, compliance SME interviews, taxonomy audit"],
+    ["Nov–Dec 2024", "IA definition, matrix exploration, Helix system extension"],
+    ["Jan–Mar 2025", "Prototype validation, trader walkthroughs, handoff to engineering"],
+    ["Apr–Dec 2025", "Rollout, iteration, pattern reuse across adjacent workflows"]
+  ]
+};
+</script>
+<script>
+// ───── CASE CONTENT · Adarma / Socket ─────
+window.CASES_DATA.adarma = {
+  // ── identity ──
+  title: "Adarma",
+  role: "Senior Product Designer · Aug 2023–Sep 2024",
+  icon: "cases/adarma-icon.png",
+  idx: "02/07",
+  company: "Adarma",
+  range: "2023–2024",
+  cardTitle: "Socket: cybersecurity ops platform, zero to one",
+  tags: ["Cybersecurity", "Design Systems", "UX Research", "0 To 1"],
+  // Level-1 Works-grid tile — a real Socket screenshot (Threat Scenario, the
+  // spider/radar coverage view), same image used first in the After carousel.
+  visual: "shield",
+  tileImage: "cases/adarma-1.png",
+
+  // Level-1 Works-grid one-line before→after statement.
+  shift: "Security posture reported monthly in a stale PowerPoint → a live, role-aware platform CISOs and analysts use every day.",
+
+  // Level-1 headline metric
+  outcome: "Zero-to-one platform · enterprise contracts renewed post-launch",
+
+  // Why the business cared, in money/risk terms — rendered near the Snapshot.
+  stake: "The platform gave clients audit benefits they didn't have before, and it directly drove contract upgrades with existing enterprise clients.",
+
+  // (a) SNAPSHOT
+  snapshot: {
+    numbers: [
+      { value: "0", label: "Monthly PowerPoints", detail: "replaced by a live platform" },
+      { value: "3→1", label: "Products unified", detail: "CISO posture, analyst triage, vulnerability management" },
+      { value: "2", label: "Enterprise clients renewed", detail: "citing the new platform directly" }
+    ]
+  },
+
+  // (b) BEFORE (deck slide 10, "From a monthly PowerPoint to a live security platform")
+  before: {
+    problems: [
+      "CISOs had no visibility between monthly PowerPoint reports, stale the moment they arrived",
+      "Analysts triaged high alert volumes across fragmented SIEM, ticketing, and reporting tooling — triage was slow and inconsistent",
+      "Alert floods hid true priority; ownership and next steps were unclear",
+      "Leadership lacked a trustworthy, real-time view of security posture to steer action"
+    ],
+    forWhom: "CISOs and security leadership, SOC L1–L3 analysts and incident-response leads",
+    whyItMattered: "A monthly PowerPoint meant every leadership decision was based on data that was already stale, while analysts had no shared view of priority — alerts got mis-routed or missed while everyone looked in a different tool.",
+    figma: null
+  },
+
+  // (c) WHAT I DID (deck slide 10 decisions + design-system retrospective)
+  decisions: [
+    {
+      title: "Designed for the C-suite first",
+      why: "CISOs had no visibility between stale monthly PowerPoints, while analysts triaged high alert volumes across fragmented tooling. Posture and SLAs are the language CISOs use to judge value, and that view was what determined whether the platform got renewed, so it shipped first.",
+      tradeoff: "Analysts waited longer for a fully-designed triage experience while the C-suite view shipped first.",
+      stakeholders: "CISOs and security leadership, SOC L1–L3 analysts and IR leads"
+    },
+    {
+      title: "One platform, role-aware views instead of three products",
+      why: "CISO posture, analyst triage, and vulnerability management became role-aware views inside a single platform instead of three separate products.",
+      tradeoff: "Cost: permission complexity, managing what each role can see and do inside one system. Gain: one product to maintain, one component library instead of three."
+    },
+    {
+      title: "Designed the full analyst workflow from scratch",
+      why: "Alert triage, priority modelling, incident ownership routing, exception tracking, and in-context playbook guidance didn't exist as a coherent workflow before — analysts were assembling it themselves across fragmented tooling.",
+      stakeholders: "SOC L1–L3 analysts and IR leads"
+    },
+    {
+      title: "Built the design function from zero, then handed it off",
+      why: "Day one, there was no design practice at all — no system, no patterns, no engineering handoff process. Engineering needed a working component library, not static specs, so patterns could ship consistently across every module. By the time I left, the function consisted of a token-driven design system built and documented in Storybook — the contract engineering built against directly, with no separate handoff step.",
+      tradeoff: "In hindsight, the design system started as a by-product of the product work rather than its own workstream — retrofitting the token structure mid-project cost two weeks. I'd scope it as a parallel workstream from sprint one next time.",
+      stakeholders: "Engineering (consumed the system directly via Storybook), and the junior designer who inherited the system and now owns it — documented well enough to survive the handoff"
+    }
+  ],
+
+  // Influence: the real tension and how alignment was won — a short passage, not a
+  // stakeholder list.
+  influence: "The pushback came from stakeholders who wanted more detailed views inside the dashboards, against the high-level posture view CISOs actually needed to make a call. The resolution was the role-aware architecture itself: CISOs got a high-level posture view, while analyst and operational views carried the depth underneath. Detail didn't lose the argument — it moved to the role that actually needed it.",
+
+  // (d) AFTER (deck slide 10 + existing changedItems)
+  after: {
+    summary: "One platform with role-aware views, CISO posture, analyst triage, and vulnerability management, replacing three fragmented products with a single, tokenised system. A clear priority model surfaces signal → rationale → next action, with ownership routing (who, by when) and in-context playbook guidance, so analysts, leads, and managers each get the view suited to their role without leaving Socket.",
+    screenshots: [
+      { img: "cases/adarma-1.png", cap: "Threat scenario, posture against a specific threat (here, ransomware) across the MITRE ATT&CK kill chain" },
+      { img: "cases/adarma-2.png", cap: "Data source integrations, prioritising and scoring which sources feed Socket" },
+      { img: "cases/adarma-3.png", cap: "Risk landscape, posture against every threat relevant to the client's business" },
+      { img: "cases/adarma-4.png", cap: "Business profile, the industry, geography, and critical services that shape the risk model" },
+      { html: SOCKET_SCREENS[0], cap: "Incident monitoring dashboard, recreation — not a screenshot of the real platform" }
+    ],
+    disclaimer: "The four screens above were part of Adarma's own marketing material — security posture, risk landscape, and business profile are safe to share publicly. The incident monitoring dashboard is a portfolio recreation built for this case study, not the real platform.",
+    figma: null
+  },
+
+  // (e) IMPACT (deck slide 12, "The PowerPoint died")
+  impact: {
+    metrics: [
+      ["Executive Visibility", "The monthly PowerPoint report was replaced entirely: CISOs and security leadership acted on live posture, compliance, and ROI instead of month-old slides."],
+      ["Operational Speed", "Consolidated signal, rationale, and next action into one view. A unified triage workspace reduced mis-routes and context switching for analysts working high alert volumes."],
+      ["Internal Adoption", "Security engineers tackled tickets inside Socket itself instead of switching context into each client's separate tooling, an internal operational win beyond the client-facing product."],
+      ["SLA Reliability", "Ownership routing and due-date visibility made on-time closures trackable for the first time. Enterprise clients reported fewer containment errors and a visible drop in SLA breaches in post-launch reviews."],
+      ["Design System", "Built the entire design system from scratch and exported the components to Storybook, so engineering consumed a working component library, not static specs. Two enterprise clients renewed and expanded contracts directly citing the new platform."],
+      ["Succession", "Documented well enough that a junior designer inherited the system and now owns it — the function outlived the sole-designer bottleneck it started as."]
+    ],
+    caveat: "Socket shipped without product analytics, so these outcomes come from client feedback and account reviews, not instrumented metrics. Instrumentation was first on my next-steps list.",
+    qualitative: [
+      "I was the sole designer embedded with engineering from day one, which was fast but created a bottleneck on design decisions. Earlier on I'd push to document decision rationale in shared artefacts so engineers could move without me in scope.",
+      "The role-aware views (Analyst / Lead / Manager) were validated in walkthroughs but not A/B tested at rollout. I'd instrument baseline task-completion times before launch so we could prove the improvement numerically, not just qualitatively."
+    ],
+    qualitativeTitle: "What I'd do differently"
+  },
+
+  // secondary/collapsed process artifacts
+  process: {
+    steps: [
+      ["Discovery", "SME interviews with SOC L1–L3 analysts and IR leads, tool/notification audit, review of typical playbooks"],
+      ["Definition", "IA for role-aware views (Analyst, Lead, Manager) and a common priority model"],
+      ["Exploration", "Low-fi flows → interactive prototypes; killed concepts that added clicks or hid context"],
+      ["Systemisation", "Design tokens + component patterns (status chips, evidence panels, trend bands)"],
+      ["Validation", "Task-based walkthroughs; refined copy, keyboard paths, and empty/error/loading states"]
+    ],
+    tools: ["Figma/FigJam", "Design Tokens", "Svelte", "Storybook", "Accessibility (WCAG 2.2)"]
+  },
+
+  timeline: [
+    ["Aug–Dec 2023", "Discovery & onboarding"],
+    ["Q1 2024", "Discovery & SME interviews, SOC analyst shadowing, tool audit"],
+    ["Q2 2024", "Prototypes & design system built from zero, Storybook implementation"],
+    ["Q3 2024", "Pilot & rollout, enterprise client validation, contracts renewed"]
+  ]
+};
+</script>
+<script>
+// ───── CASE CONTENT · Emerios ─────
+window.CASES_DATA.emerios = {
+  // ── identity (unchanged) ──
+  title: "Emerios",
+  role: "UX/UI Developer → Senior UX/UI Developer · Dec 2013–Mar 2017",
+  icon: "cases/emerios-icon.svg",
+  idx: "06/07",
+  company: "Emerios",
+  range: "2013–2017",
+  // Reframed as a sales platform (see stake below): enrolment was the sales
+  // channel; TPV verification and proof handling were steps in closing and
+  // validating a sale, not the headline.
+  cardTitle: "Sales enablement for regulated service providers",
+  tags: ["Sales Enablement", "B2B SaaS", "TPV Verification"],
+  visual: "flow",
+  // Level-1 Works-grid tile — real product screenshot (same image used as the
+  // lead "After" screenshot below), not the small logo icon.
+  tileImage: "cases/emerios-1.jpg",
+
+  // Level-1 Works-grid one-line before→after statement.
+  shift: "Enrolment paperwork stalled sales for regulated providers → a centralised Vault that halved review time and kept deals moving.",
+
+  // Level-1 headline metric
+  outcome: "Back-office review time halved — faster sales throughput across 3 products",
+
+  // Why the business cared, in money/risk terms — rendered near the Snapshot.
+  // Emerios was a sales platform: enrolment was the sales channel, TPV verification
+  // and proof handling were steps in closing and validating a sale — verification
+  // and enrolment speed was sales throughput, not just a compliance nicety.
+  stake: "Emerios was a sales platform for regulated service providers — enrolment was the sales channel. Faster, audit-ready verification meant faster sales throughput, not just cleaner paperwork.",
+
+  // (a) SNAPSHOT
+  snapshot: {
+    numbers: [
+      { value: "~50%", label: "Faster back-office review", detail: "time per case halved" },
+      { value: "3", label: "Products unified", detail: "Agent Vault, Back-Office, SafeLink Enrollment" },
+      { value: "Audit-ready", label: "Proof records", detail: "across all 3 products, no extra documentation" }
+    ]
+  },
+
+  // (b) BEFORE
+  before: {
+    problems: [
+      "Sensitive proofs scattered across email/folders slowed retrieval and increased compliance risk",
+      "Back-office reviewers had to jump between pages to classify proofs and resolve errors",
+      "Applicants struggled to submit documentation from the devices/channels they actually had"
+    ],
+    forWhom: "Agents, back-office reviewers, compliance auditors, and applicants submitting documentation",
+    figma: null
+  },
+
+  // (c) WHAT I DID — sourced from process.steps
+  decisions: [
+    {
+      title: "Standardised a capture → classify → approve workflow across three products",
+      why: "Interviews with agents, back-office reviewers, and compliance auditors mapped every proof type, rejection reason, and escalation path. A single IA and proof taxonomy replaced three products' worth of inconsistent handling.",
+      stakeholders: "Agents, back-office reviewers, compliance auditors"
+    },
+    {
+      title: "Kept a single-screen document review over modal-heavy flows",
+      why: "Multiple document review approaches were explored; modal-heavy flows were killed in favor of a single-screen carousel with a required-proof checklist, keeping reviewers in one continuous view instead of jumping between pages.",
+      stakeholders: "Back-office reviewers"
+    },
+    {
+      title: "Built multi-channel enrolment (web, mobile, agent-assisted)",
+      why: "Applicants struggled to submit documentation from the devices and channels they actually had. A consistent step structure and validation across web, mobile, and agent-assisted channels met applicants where they were.",
+      stakeholders: "Applicants, agents"
+    },
+    {
+      title: "Tokenised status chips and proof badges across all three products",
+      why: "Consistent status chips, proof-type badges, and action buttons across Vault, Back-Office, and Enrollment meant reviewers only had to learn one visual language, not three.",
+    }
+  ],
+
+  // (d) AFTER
+  after: {
+    summary: "Agent Vault, Back-Office console, and SafeLink Enrollment centralise identity proofs so enrolment, the sales channel, could move at the speed of the sale. A searchable Vault holds structured metadata, versioning, and quick actions. Single-screen document processing replaces page-jumping with a required-proof checklist and standardised reasons. Multi-channel enrolment (web, mobile, agent-assisted) gives applicants a consistent step structure wherever they start.",
+    screenshots: [
+      { img: "cases/emerios-1.jpg", cap: "Agent Vault — one searchable record instead of proofs scattered across email and folders" },
+      { img: "cases/emerios-2.jpg", cap: "Back-office review collapsed onto one screen — no more page-jumping to classify a proof" },
+      { img: "cases/emerios-3.jpg", cap: "SafeLink Enrollment — the same step structure whether an applicant starts on web, mobile, or with an agent" },
+      { img: "cases/emerios-6.jpg", cap: "Case timeline — an audit-ready trail without extra documentation work" },
+      { img: "cases/emerios-9.jpg", cap: "Proof status and next action together — the single-screen checklist in use" },
+      { img: "cases/emerios-10.jpg", cap: "Case status at a glance across all three products" }
+    ],
+    figma: null
+  },
+
+  // (e) IMPACT
+  impact: {
+    metrics: [
+      ["Sales Throughput", "Centralised proof retrieval and single-screen review halved back-office time per case, keeping enrolment moving as the sales channel it was, not just a compliance step."],
+      ["Design System", "Token-driven components reused across Vault, Back-Office, and Enrollment, accelerating new feature delivery across all three products."]
+    ],
+    caveat: "Reported from case-management logs at the time — I don't have access to verify the exact figures today, over a decade after the role ended.",
+    qualitative: [
+      "Sales-platform framing came later in my thinking than it should have — I designed the enrolment and verification flows well before I fully saw them as the sales channel they were. I'd frame that connection on day one next time."
+    ],
+    qualitativeTitle: "What I'd do differently"
+  },
+
+  // secondary/collapsed process artifacts
+  process: {
+    steps: [
+      ["Discovery", "Interviews with agents, back-office reviewers, and compliance auditors. Mapped all proof types, rejection reasons, and escalation paths"],
+      ["Definition", "IA for capture → classify → approve workflow. Standardised proof taxonomy across all three products"],
+      ["Exploration", "Multiple document review UX approaches, killed modal-heavy flows, kept single-screen carousel with checklist"],
+      ["Systemisation", "Tokenised status chips, proof type badges, and action buttons. Consistent across Vault, Back-Office, and Enrollment"],
+      ["Validation", "Task-based walkthroughs with agents and reviewers. Measured time-to-complete per case type"]
+    ],
+    tools: ["Figma", "Design Tokens", "Angular", "SCSS", "Ionic", "Accessibility (WCAG 2.2)"]
+  },
+
+  timeline: [
+    ["2013–2014", "Agent Vault, discovery, IA, implementation"],
+    ["2014–2015", "Back-Office console, single-screen document processing"],
+    ["2015–2017", "SafeLink Enrollment, multi-channel flow, design system unification"]
+  ]
+};
+</script>
+<script>
+// ───── CASE CONTENT · SilicoAI ─────
+window.CASES_DATA.silico = {
+  // ── identity (unchanged) ──
+  title: "SilicoAI",
+  role: "UX Engineer · Dec 2020–Jun 2023",
+  icon: "cases/silico-icon.svg",
+  idx: "03/07",
+  company: "SilicoAI",
+  range: "2020–2023",
+  cardTitle: "Decision-intelligence platform for scenario planning",
+  tags: ["AI Products", "Enterprise B2B", "UX Engineering"],
+  visual: "chart",
+  // Level-1 Works-grid tile — real product screenshot (same image used as the
+  // lead "After" screenshot below), not the small logo icon.
+  tileImage: "cases/silico-1.svg",
+
+  // Level-1 Works-grid one-line before→after statement.
+  shift: "Scenario insights split across models, spreadsheets, and BI views → one decision-intelligence workspace with shared baseline-vs-scenario comparisons.",
+
+  // Level-1 headline metric (unchanged)
+  outcome: "3 years end-to-end ownership · faster time-to-decision for operators",
+
+  // (a) SNAPSHOT — founding-designer framing, not a padded metric. It was three
+  // products in one platform: data-scientist tooling, operational data sources,
+  // and a decision-maker workspace.
+  snapshot: {
+    numbers: [
+      { value: "0→1", label: "Founding designer", detail: "no product, no design system, day one" },
+      { value: "3", label: "Products, one platform", detail: "data scientists, data sources, decision-makers" },
+      { value: "3 yrs", label: "End-to-end ownership", detail: "problem framing → design system → front-end implementation" }
+    ]
+  },
+
+  // (b) BEFORE
+  before: {
+    problems: [
+      "Insights split across models, spreadsheets, and BI views, making scenario planning slow and inconsistent",
+      "Users couldn't see drivers vs outcomes or how changing one lever flowed through the system",
+      "Collaboration friction: results weren't easy to share, compare, or explain to non-modellers"
+    ],
+    forWhom: "Operators and leaders running \"what-if\" scenario planning, plus non-modellers who needed results explained to them",
+    whyItMattered: "Gathering insight out of the models was hard enough on its own — turning that insight into something a non-modeller decision-maker could actually act on was harder still. Results lived in whichever tool produced them, with no shared way to explain the \"why\" behind a number to someone outside the model.",
+    figma: null
+  },
+
+  // (c) WHAT I DID — sourced from process.steps
+  decisions: [
+    {
+      title: "Unified models, scenarios, and KPIs into one workspace",
+      why: "Insights were split across models, spreadsheets, and BI views, making scenario planning slow and inconsistent. A shared interaction pattern brought models → drivers → scenarios → KPIs into one IA.",
+      stakeholders: "Modellers, operations users, executive users"
+    },
+    {
+      title: "Built driver trees with progressive disclosure over exposing all assumptions at once",
+      why: "Users couldn't see drivers vs outcomes or how changing one lever flowed through the system. Progressive disclosure (assumptions → impact → risk) let users go as deep as they needed without hiding the reasoning.",
+      stakeholders: "Operators and leaders"
+    },
+    {
+      title: "Killed prototype paths that hid assumptions or slowed iteration",
+      why: "Low-fi sketches went through interactive prototypes; any direction that hid assumptions or slowed iteration was killed before it reached the design system stage.",
+    },
+    {
+      title: "Standardised comparison views (baseline vs scenario) with annotated \"why\" explanations",
+      why: "Results weren't easy to share, compare, or explain to non-modellers. Annotated delta chips and baseline-vs-scenario views made the reasoning legible to people outside the model itself.",
+      stakeholders: "Non-modeller stakeholders needing results explained"
+    }
+  ],
+
+  // (d) AFTER
+  after: {
+    summary: "A unified workspace brings models, scenarios, and KPIs together with a shared interaction pattern. Driver trees and scenario controls use progressive disclosure (assumptions → impact → risk), with clear baseline-vs-scenario comparison views and annotated \"why\" explanations, all built on tokenised, reusable UI patterns for charts, deltas, sensitivities, and \"next action\" prompts.",
+    screenshots: [
+      { img: "cases/silico-1.svg", cap: "Scenario workspace — drivers and KPIs live together instead of split across tools" },
+      { img: "cases/silico-2.svg", cap: "Driver tree — how one lever's change flows through to the outcome" },
+      { img: "cases/silico-3.svg", cap: "Baseline vs scenario — delta chips make the 'why' legible to non-modellers" },
+      { img: "cases/silico-4.svg", cap: "Sensitivity view — brittle scenarios flagged before they became bad decisions" },
+      { img: "cases/silico-9.svg", cap: "Model configuration — assumptions stay visible, not buried in a spreadsheet" },
+      { img: "cases/silicosystem-1.svg", cap: "The design system built to keep every data view consistent over 3 years" }
+    ],
+    figma: null
+  },
+
+  // (e) IMPACT
+  impact: {
+    metrics: [
+      ["Operational Speed", "Shorter path from question → model run → decision by consolidating drivers, KPIs, and comparisons."],
+      ["Quality & Risk", "Clear assumptions and provenance reduced misinterpretation. Sensitivity views highlighted brittle scenarios early."],
+      ["Adoption", "Scenario workspace became the default for planning discussions. Patterns reused as the product grew."],
+      ["Design System", "Token-driven components ensured consistency across all data views throughout 3 years of product evolution."]
+    ],
+    qualitative: [
+      "It was three products in one platform — one for data scientists, one operational for data sources, one for decision-makers. I'd focus more on the overall journey across the platform and invest earlier in the connective journey between them, rather than treating each product in isolation."
+    ],
+    qualitativeTitle: "What I'd do differently"
+  },
+
+  // secondary/collapsed process artifacts
+  process: {
+    steps: [
+      ["Discovery", "Interviews with modellers, ops, and exec users. Audit of current models, dashboards, and handoffs"],
+      ["Definition", "IA for models → drivers → scenarios → KPIs. Standardised comparison and explanation patterns"],
+      ["Exploration", "Low-fi sketches → interactive prototypes. Killed paths that hid assumptions or slowed iteration"],
+      ["Systemisation", "Design tokens + component patterns (driver controls, delta chips, compare panels)"],
+      ["Validation", "Task-based reviews, empty/error/loading states, keyboard paths, chart annotations"]
+    ],
+    tools: ["Figma/FigJam", "Design Tokens", "React/Next.js", "TypeScript", "SCSS", "Storybook", "Recharts/D3", "Claude", "Accessibility (WCAG 2.2)"]
+  },
+
+  timeline: []
+};
+</script>
+<script>
+// ───── CASE CONTENT · Highland Easy Life ─────
+window.CASES_DATA.highland = {
+  // ── identity (unchanged) ──
+  title: "Highland Easy Life",
+  role: "Senior UX/UI Developer · Oct 2019–Jan 2021 · via Band of Coders",
+  icon: "cases/highland-icon.jpeg",
+  idx: "05/07",
+  company: "Highland Easy Life",
+  range: "2019–2020",
+  cardTitle: "Quick-quote flow and broker dashboard",
+  tags: ["Insurance", "Broker Dashboard", "Conversion"],
+  visual: "doc",
+  // Level-1 Works-grid tile — real product screenshot (same image used as the
+  // lead "After" screenshot below), not the small logo icon.
+  tileImage: "cases/highland-8.jpg",
+
+  // Level-1 Works-grid one-line before→after statement.
+  shift: "Consumers bounced between forms and carrier pages with incomparable quotes → a guided flow and a broker dashboard with confidence-scored leads.",
+
+  // Level-1 headline metric — "significantly" removed as an unquantified weasel word
+  outcome: "Reduced quote abandonment · faster broker follow-up",
+
+  // Why the business cared, in money/risk terms — rendered near the Snapshot.
+  stake: "An abandoned quote is a lost policy. The broker dashboard existed specifically to convert and follow up on leads before they went cold.",
+
+  // (a) SNAPSHOT — no quantified metric exists in the source material for this
+  snapshot: {
+    numbers: [
+      { value: "2", label: "Connected surfaces shipped", detail: "consumer quote flow + broker ELA dashboard" }
+    ]
+  },
+
+  // (b) BEFORE
+  before: {
+    problems: [
+      "Consumers bounced between forms and carrier pages. Quotes weren't comparable or easy to refine",
+      "Brokers lacked a unified view of lead details, health class, premium, term, and status, slowing follow-up"
+    ],
+    forWhom: "Consumers shopping for multi-carrier life insurance, and brokers following up on leads",
+    figma: null
+  },
+
+  // (c) WHAT I DID — sourced from process.steps
+  decisions: [
+    {
+      title: "Built a guided Learn → Refine → Review consumer flow",
+      why: "Consumers bounced between forms and carrier pages with quotes that weren't comparable or easy to refine. A guided flow with live premium ranges and clear monthly comparisons across carriers replaced that back-and-forth.",
+      stakeholders: "Consumers shopping for life insurance"
+    },
+    {
+      title: "Chose a scannable lead list with contextual actions over a form-first broker dashboard",
+      why: "Brokers lacked a unified view of lead details, health class, premium, term, and status, which slowed follow-up. The dashboard was defined around a scannable lead list with contextual actions rather than requiring brokers to open each lead to act.",
+      stakeholders: "Brokers"
+    },
+    {
+      title: "Tested table vs. card vs. hybrid broker dashboard layouts",
+      why: "Multiple broker dashboard layouts were explored at low-fi before settling on the sortable-leads-with-confidence-signals pattern that shipped.",
+      stakeholders: "Brokers"
+    },
+    {
+      title: "Tokenised tables, chips, and summary panels across consumer and broker surfaces",
+      why: "A shared token set for tables, chips, and summary panels meant the consumer quote flow and the broker dashboard, two very different surfaces, stayed visually and structurally consistent.",
+    }
+  ],
+
+  // (d) AFTER
+  after: {
+    summary: "A guided Learn → Refine → Review quote flow gives consumers live premium ranges and clear monthly comparisons across carriers. A companion Broker ELA Dashboard gives brokers sortable leads, confidence signals, and quick actions (Quote & Apply) without leaving the dashboard.",
+    screenshots: [
+      { img: "cases/highland-1.jpg", cap: "Broker ELA dashboard, lead management with confidence signals" },
+      { img: "cases/highland-6.jpg", cap: "Quick quote, Learn step" },
+      { img: "cases/highland-7.jpg", cap: "Quick quote, Refine step" },
+      { img: "cases/highland-8.jpg", cap: "Quick quote, Review and carrier comparison" },
+      { img: "cases/highland-9.jpg", cap: "Lead detail panel, health class, term, status" },
+      { img: "cases/highland-10.jpg", cap: "Broker dashboard, mobile view" },
+      { img: "cases/easylife-1.png", cap: "EasyLife, quote flow overview" },
+      { img: "cases/easylife-2.png", cap: "EasyLife, carrier comparison" },
+      { img: "cases/easylife-3.png", cap: "EasyLife, lead management" },
+      { img: "cases/easylife-4.png", cap: "EasyLife, broker tools" },
+      { img: "cases/easylife-5.png", cap: "EasyLife, dashboard summary" }
+    ],
+    figma: null
+  },
+
+  // (e) IMPACT — "SLA Reliability" cut per de-templating pass: it restated
+  // "Operational Speed" under a different label rather than adding new information.
+  impact: {
+    metrics: [
+      ["Operational Speed", "Consumers move from estimate to carrier selection faster. Brokers see all lead context without system-hopping."],
+      ["Quality & Risk", "Structured refine questions reduce bad inputs. Broker view lowers mis-prioritised outreach."],
+      ["Design System", "Tokenised tables, chips, and summary panels reused across consumer and broker surfaces."]
+    ],
+    qualitative: [
+      "I wish I'd had more direct feedback from brokers — as contractors on this engagement, we couldn't go deeper into research access than we did."
+    ],
+    qualitativeTitle: "What I'd do differently"
+  },
+
+  // secondary/collapsed process artifacts
+  process: {
+    steps: [
+      ["Discovery", "Broker interviews to understand lead prioritisation, common failure modes, key data points needed per lead"],
+      ["Definition", "IA for Learn → Refine → Review consumer flow. Broker dashboard focused on scannable lead list with contextual actions"],
+      ["Exploration", "Quick-quote flow tested with consumers at low-fi. Multiple broker dashboard layouts, table vs card vs hybrid"],
+      ["Systemisation", "Tokenised tables, chips, and summary panels across consumer and broker surfaces"],
+      ["Validation", "Task-based walkthroughs with brokers. Refined copy, empty states, keyboard paths"]
+    ],
+    tools: ["Figma", "Design Tokens", "React", "SCSS", "Accessibility (WCAG 2.2)"]
+  },
+
+  timeline: []
+};
+</script>
+<script>
+// ───── CASE CONTENT · PSA / Peugeot ─────
+window.CASES_DATA.psa = {
+  // ── identity (unchanged) ──
+  title: "PSA / Peugeot",
+  role: "Senior UX/UI Developer · Oct 2019–Jan 2021 · via Band of Coders",
+  icon: "cases/psa-icon.svg",
+  idx: "04/07",
+  company: "PSA / Peugeot",
+  range: "2019–2020",
+  cardTitle: "Two e-commerce flows for automotive",
+  tags: ["E-Commerce", "Multi-Step Flows", "Conversion UX"],
+  visual: "cart",
+  // Level-1 Works-grid tile — real product screenshot (same image used as the
+  // lead "After" screenshot below), not the small logo icon.
+  tileImage: "cases/AFS-1.jpg",
+
+  // Level-1 Works-grid one-line before→after statement.
+  shift: "Service booking and vehicle purchase split across phone calls, brochures, and calculators → two guided flow prototypes proving self-service was feasible.",
+
+  // Level-1 headline metric — see the PoC reframe note below.
+  outcome: "Two end-to-end e-commerce flows, designed and prototyped as proofs of concept",
+
+  // Why the business cared, in money/risk terms — rendered near the Snapshot.
+  // PSA/AFS was a proof of concept, not a shipped product (see the reframe note on
+  // this case's after/impact fields) — the stake was demonstrating feasibility.
+  stake: "The stake was demonstrating that a guided self-service flow could replace phone, brochure, and dealer handoffs — proving the concept before committing to a full build.",
+
+  // (a) SNAPSHOT — reframed as prototypes, not shipped flows; no quantified
+  // production metric exists because this never went to production.
+  snapshot: {
+    numbers: [
+      { value: "2", label: "End-to-end flow prototypes", detail: "AFS service booking + Peugeot Online Purchase" }
+    ]
+  },
+
+  // (b) BEFORE
+  before: {
+    problems: [
+      "AFS: service booking required multiple phone/email handoffs",
+      "AFS: address/ZIP and geolocation errors stalled bookings",
+      "Peugeot Online Purchase: vehicle purchase journeys fragmented across brochures, dealers, and calculators",
+      "Peugeot Online Purchase: users couldn't compare versions, packages, and payments in one flow"
+    ],
+    forWhom: "AFS customers booking at-home mechanic service, and Peugeot vehicle buyers configuring a purchase online",
+    figma: null
+  },
+
+  // (c) WHAT I DID — built only from contextItems/changedItems text that is
+  // genuinely about this case (see the flag at the top of this file)
+  decisions: [
+    {
+      title: "Built a guided funnel for AFS: location → vehicle → services → time → pay → confirm",
+      why: "Service booking previously required multiple phone/email handoffs, and address/ZIP or geolocation errors stalled bookings. A guided funnel with instant validation at each step catches errors immediately instead of after a handoff.",
+    },
+    {
+      title: "Built a single-flow configurator for Peugeot Online Purchase with live pricing throughout",
+      why: "Vehicle purchase journeys were fragmented across brochures, dealers, and calculators, and users couldn't compare versions, packages, and payments in one flow. A single flow (model → version → packages → finance → checkout) keeps price visible at every step.",
+    }
+  ],
+
+  // (d) AFTER
+  after: {
+    summary: "The AFS prototype guides location → vehicle (VIN/model) → services → time → pay → confirm, with instant validation at each step. The Peugeot Online Purchase prototype uses a single-flow configurator, model → version → packages → finance → checkout, with live price visible throughout.",
+    screenshots: [
+      { img: "cases/AFS-1.jpg", cap: "AFS + Peugeot, connected service and purchase flows" },
+      { img: "cases/AFS-2.jpg", cap: "AFS, location search and vehicle selection" },
+      { img: "cases/AFS-3.jpg", cap: "AFS, service selection and time booking" },
+      { img: "cases/AFS-4.jpg", cap: "AFS, booking confirmation and payment" },
+      { img: "cases/AFS-5.jpg", cap: "AFS, technician matching and profile cards" },
+      { img: "cases/AFS-6.jpg", cap: "AFS, geolocation and service radius" },
+      { img: "cases/AFS-7.jpg", cap: "AFS, flow summary" },
+      { img: "cases/psa-1.jpg", cap: "Peugeot Online Purchase, model configurator" },
+      { img: "cases/psa-2.jpg", cap: "Peugeot, version and package selection" },
+      { img: "cases/psa-3.jpg", cap: "Peugeot, finance options with live pricing" },
+      { img: "cases/psa-4.jpg", cap: "Peugeot, checkout flow" },
+      { img: "cases/psa-5.jpg", cap: "Peugeot, order confirmation" }
+    ],
+    figma: null
+  },
+
+  // (e) IMPACT — reframed as PoC validation, not measured production outcomes.
+  // The original metrics implied a shipped, instrumented product; neither flow
+  // went live, so there is no operational data to report.
+  impact: {
+    metrics: [
+      ["Feasibility", "Validated that a guided, self-service flow could replace phone, brochure, and dealer handoffs for both booking and purchase."],
+      ["Design System", "Token-driven components proven reusable across two very different flows, service and commerce, from one shared design language."]
+    ],
+    caveat: "Both flows were designed and prototyped as proofs of concept — neither shipped to production, so there are no operational metrics to report here."
+    // No retrospective/qualitative content exists for this case in the prior data.
+  },
+
+  // secondary/collapsed process artifacts — steps intentionally omitted, see flag
+  // at the top of this file. Tools list kept (generic, not domain-mismatched).
+  process: {
+    tools: ["Figma/FigJam", "Design Tokens", "React", "TypeScript", "Accessibility (WCAG 2.2)"]
+  },
+
+  timeline: []
+};
+</script>
+<script>
+// ───── CASE CONTENT · More Works ─────
+// Exempt from the 5-part Snapshot/Before/What I Did/After/Impact arc: a grab-bag
+// of small, unrelated concepts with no single before/after story or hard metric
+// across them. Kept in a lighter multi-project tab format.
+window.CASES_DATA.more = {
+  title: "More Works",
+  role: "Various Projects",
+  icon: "cases/waggl-1.jpg",
+  idx: "07/07",
+  company: "Various Projects",
+  range: "",
+  cardTitle: "Product concepts, event sites & prototypes",
+  tags: ["Prototypes", "Concepts", "UI Patterns"],
+  outcome: "3 projects across employee engagement, HR tech & events",
+  visual: "img",
+  isMultiProject: true,
+  projectTabs: [
+    {
+      name: "Waggl",
+      lede: "Engagement platform for real-time employee feedback and idea crowdsourcing.",
+      context: "Teams lacked a fast, low-friction way to surface ideas and gauge sentiment across the organisation.",
+      did: "Designed the feedback feed, voting UI, and results dashboard. Focused on low-friction input and clear signal aggregation.",
+      outcome: "Rapid idea prioritisation with high participation rates.",
+      imgs: [{ img: "cases/waggl-1.jpg", cap: "Waggl, employee feedback and crowdsourcing platform" }]
+    },
+    {
+      name: "Arc10 / Careerlist",
+      lede: "HR platform for team dynamics matching and talent discovery — same product, rebranded from Arc10 to Careerlist mid-project.",
+      context: "Hiring managers lacked tools to evaluate team fit beyond CVs. Most matching was unstructured with no dynamics or culture layer.",
+      did: "Designed the candidate profile, team-fit score, and structured comparison view. Focused on reducing bias through signal rather than gut feel. Worked through the rebrand without disrupting the design system.",
+      outcome: "Structured team-fit evaluation replacing unstructured interview-only screening.",
+      imgs: [{ img: "cases/arc10-1.jpg", cap: "Arc10 / Careerlist, leader profile and team-fit matching" }]
+    },
+    {
+      name: "Openstack",
+      lede: "Event website for the OpenStack Summit Berlin 2018.",
+      context: "The open source infrastructure community needed a high-traffic conference site covering schedule, sponsors, travel, and ticket registration.",
+      did: "Designed and built the summit website: hero, schedule, sponsor tiers, and registration flow. Optimised for global traffic across time zones.",
+      outcome: "Live for the Berlin 2018 summit with 200+ sessions and workshops.",
+      imgs: [{ img: "cases/openstack-1.jpg", cap: "OpenStack Summit Berlin 2018, conference website" }]
+    }
+  ]
+};
+</script>
 
 <script>
 // ─────────────────────────────────────────────────────────────────────
@@ -733,6 +1652,8 @@ function setTheme(t){
   if (icon) icon.innerHTML = (t === "dark")
     ? `<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>`
     : `<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>`;
+  const tip = document.getElementById("themeTip");
+  if (tip) tip.textContent = t === "dark" ? "Go light" : "Go dark";
   try { localStorage.setItem("bi-theme", t); } catch(e){}
 }
 themeBtn.addEventListener("click", () => {
@@ -744,496 +1665,14 @@ try {
   if (saved) setTheme(saved);
 } catch(e){}
 
-// ───── BOFA REPRESENTATIVE SCREENS ─────
-// These are design concept mockups, not screenshots of the actual Bank of America product.
-const BOFA_SCREENS = (() => {
-  const B='#0B0F14',S='rgba(255,255,255,0.05)',BR='rgba(255,255,255,0.09)',T='#E2EAF4',D='rgba(226,234,244,0.7)';
-  const G='#22C55E',R='#EF4444',A='#F59E0B',BL='#60A5FA';
-  const badge=(type,label)=>{const c={gtt:{bg:'rgba(34,197,94,0.12)',b:'rgba(34,197,94,0.3)',col:G,sym:'✓'},ngtt:{bg:'rgba(239,68,68,0.12)',b:'rgba(239,68,68,0.3)',col:R,sym:'✕'},review:{bg:'rgba(245,158,11,0.12)',b:'rgba(245,158,11,0.3)',col:A,sym:'△'}}[type];return `<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:3px;background:${c.bg};border:1px solid ${c.b};font-size:9px;color:${c.col};font-weight:600;letter-spacing:0.04em;white-space:nowrap;font-family:system-ui">${c.sym} ${label}</span>`;};
-
-  // Screen 1, Full compliance matrix
-  const s1=()=>{
-    const ents=['MLI','BAMLI','DAC','BKNA','MLCI','MLJS'];
-    const rows=[{r:'AML / KYC',s:['gtt','gtt','gtt','review','gtt','gtt']},{r:'Dodd-Frank / EMIR',s:['gtt','gtt','ngtt','gtt','gtt','gtt']},{r:'Suitability check',s:['gtt','gtt','gtt','gtt','review','gtt']},{r:'Credit limit',s:['gtt','gtt','gtt','gtt','gtt','gtt']},{r:'Legal entity',s:['gtt','gtt','gtt','ngtt','gtt','gtt']}];
-    const lbl={gtt:'GTT',ngtt:'NGTT',review:'Review'};
-    return `<div style="width:100%;height:100%;background:${B};display:flex;flex-direction:column;font-family:system-ui,sans-serif;overflow:hidden">
-      <div style="padding:9px 14px;border-bottom:1px solid ${BR};display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-        ${[['Account','ACC-84201'],['Booking entity','MLI'],['Product','Equity swap']].map(([k,v])=>`<div style="background:${S};border:1px solid ${BR};border-radius:3px;padding:4px 10px"><span style="display:block;font-size:8px;color:${D};text-transform:uppercase;letter-spacing:0.08em">${k}</span><span style="font-size:11px;color:${T};font-weight:500">${v}</span></div>`).join('')}
-        <div style="margin-left:auto;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:3px;padding:4px 10px;display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:${G};display:inline-block"></span><span style="font-size:9px;color:${G};text-transform:uppercase;letter-spacing:0.08em;font-weight:600">Ready to trade</span></div>
-      </div>
-      <div style="padding:7px 14px;border-bottom:1px solid ${BR};font-size:9px;color:${D}"><span style="color:${T};font-weight:500">ACC-84201</span> · Pension Fund · United States</div>
-      <div style="flex:1;overflow:auto">
-        <table style="width:100%;border-collapse:collapse">
-          <thead><tr>
-            <th style="padding:6px 12px;text-align:left;font-size:8px;color:${D};text-transform:uppercase;letter-spacing:0.08em;font-weight:500;border-bottom:1px solid ${BR};border-right:1px solid ${BR};background:${B};min-width:110px">Rule</th>
-            ${ents.map(e=>`<th style="padding:5px 8px;text-align:center;font-size:8px;color:${D};text-transform:uppercase;letter-spacing:0.06em;font-weight:500;border-bottom:1px solid ${BR};border-right:1px solid ${BR};min-width:62px">${e}<br><span style="color:${G};font-size:8px">● GTT</span></th>`).join('')}
-          </tr></thead>
-          <tbody>${rows.map(row=>`<tr style="border-bottom:1px solid ${BR}"><td style="padding:7px 12px;font-size:9px;color:${T};font-weight:500;border-right:1px solid ${BR};background:rgba(255,255,255,0.02)">${row.r}</td>${row.s.map(st=>`<td style="padding:6px 8px;text-align:center;border-right:1px solid ${BR}">${badge(st,lbl[st])}</td>`).join('')}</tr>`).join('')}</tbody>
-        </table>
-      </div>
-    </div>`;
-  };
-
-  // Screen 2, NGTT restriction detail + escalation panel
-  const s2=()=>`<div style="width:100%;height:100%;background:${B};display:flex;font-family:system-ui,sans-serif;overflow:hidden">
-    <div style="flex:1;border-right:1px solid ${BR};display:flex;flex-direction:column;overflow:hidden">
-      <div style="padding:9px 12px;border-bottom:1px solid ${BR};font-size:9px;color:${D};text-transform:uppercase;letter-spacing:0.08em">Compliance matrix · DAC</div>
-      <table style="width:100%;border-collapse:collapse">
-        <thead><tr><th style="padding:5px 10px;font-size:8px;color:${D};text-align:left;border-bottom:1px solid ${BR};font-weight:500">Rule</th><th style="padding:5px 8px;font-size:8px;color:${D};text-align:center;border-bottom:1px solid ${BR};font-weight:500">Status</th></tr></thead>
-        <tbody>${[['AML / KYC','gtt'],['Dodd-Frank / EMIR','ngtt'],['Suitability check','gtt'],['Credit limit','gtt'],['Legal entity','gtt']].map(([r,st],i)=>`<tr style="border-bottom:1px solid ${BR};${i===1?`background:rgba(239,68,68,0.06)`:''}"><td style="padding:7px 10px;font-size:9px;color:${i===1?R:T};font-weight:${i===1?600:400}">${r}</td><td style="padding:6px 8px;text-align:center">${badge(st,st==='gtt'?'GTT':st==='ngtt'?'NGTT':'Review')}</td></tr>`).join('')}</tbody>
-      </table>
-    </div>
-    <div style="width:53%;display:flex;flex-direction:column;overflow:hidden">
-      <div style="padding:9px 13px;border-bottom:1px solid ${BR};display:flex;align-items:center;gap:8px">${badge('ngtt','NGTT')}<span style="font-size:10px;color:${T};font-weight:500">DAC · Dodd-Frank / EMIR</span></div>
-      <div style="flex:1;padding:13px;display:flex;flex-direction:column;gap:11px;overflow:auto">
-        <div><span style="font-size:8px;color:${D};text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:5px">Restriction, plain language</span><p style="font-size:10.5px;color:${T};line-height:1.55;margin:0">No authorisation on file for this booking entity under Dodd-Frank reporting obligations. LEI documentation required before trading can proceed.</p></div>
-        <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);border-radius:3px;padding:9px 11px"><span style="font-size:8px;color:${R};text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:3px">Previously: NGTT_RSN_47A</span><span style="font-size:9px;color:rgba(239,68,68,0.65)">Opaque code, required a secondary lookup to understand</span></div>
-        <div><span style="font-size:8px;color:${D};text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:7px">Escalation path</span>
-          ${[['1','Request LEI documentation via Ops portal'],['2','Compliance review, SLA: 2 business days'],['3','Re-run GTT check once documentation confirmed']].map(([n,l])=>`<div style="display:flex;align-items:center;gap:8px;padding:7px 9px;background:${S};border:1px solid ${BR};border-radius:3px;margin-bottom:5px"><span style="width:17px;height:17px;border-radius:50%;background:rgba(96,165,250,0.15);display:flex;align-items:center;justify-content:center;font-size:8px;color:${BL};flex-shrink:0;font-weight:600">${n}</span><span style="font-size:9px;color:${T}">${l}</span></div>`).join('')}
-        </div>
-      </div>
-      <div style="padding:9px 13px;border-top:1px solid ${BR};display:flex;gap:7px">
-        <button style="flex:1;padding:7px;background:rgba(96,165,250,0.15);border:1px solid rgba(96,165,250,0.35);border-radius:3px;font-size:9px;color:${BL};text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;font-family:system-ui">Raise request</button>
-        <button style="flex:1;padding:7px;background:${S};border:1px solid ${BR};border-radius:3px;font-size:9px;color:${D};text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;font-family:system-ui">View history</button>
-      </div>
-    </div>
-  </div>`;
-
-  // Screen 3, Taxonomy: code → plain language
-  const s3=()=>{
-    const pairs=[['NGTT_RSN_47A','No LEI documentation on file for Dodd-Frank reporting obligations'],['NGTT_RSN_12C','AML/KYC review pending, last refresh exceeds 90-day threshold'],['NGTT_RSN_08B','Counterparty suitability assessment has expired'],['NGTT_RSN_31X','Credit limit exceeded for the selected booking entity'],['NGTT_RSN_55D','Legal entity not approved for this product type'],['NGTT_RSN_22G','Sanctions screening flag, manual review required before trading']];
-    return `<div style="width:100%;height:100%;background:${B};display:flex;flex-direction:column;font-family:system-ui,sans-serif;overflow:hidden">
-      <div style="padding:9px 14px;border-bottom:1px solid ${BR};display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:${D};text-transform:uppercase;letter-spacing:0.08em">Taxonomy audit, 47 NGTT codes → plain language</span><span style="margin-left:auto;font-size:9px;color:${G};background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);padding:2px 8px;border-radius:3px;white-space:nowrap">Zero training overhead</span></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid ${BR}"><div style="padding:6px 14px;font-size:8px;color:${R};text-transform:uppercase;letter-spacing:0.08em;border-right:1px solid ${BR};background:rgba(239,68,68,0.04)">Before, internal code</div><div style="padding:6px 14px;font-size:8px;color:${G};text-transform:uppercase;letter-spacing:0.08em;background:rgba(34,197,94,0.04)">After, plain language</div></div>
-      <div style="flex:1;overflow:auto">${pairs.map(([code,plain])=>`<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid ${BR}"><div style="padding:9px 14px;border-right:1px solid ${BR};display:flex;align-items:center"><code style="font-size:9.5px;color:rgba(239,68,68,0.65);font-family:'DM Mono',monospace,system-ui;letter-spacing:0.04em">${code}</code></div><div style="padding:9px 14px;display:flex;align-items:center"><span style="font-size:10px;color:${T};line-height:1.45">${plain}</span></div></div>`).join('')}<div style="padding:9px 14px;text-align:center;font-size:9px;color:${D};background:rgba(255,255,255,0.02)">+ 41 additional codes mapped across all rule categories</div></div>
-    </div>`;
-  };
-
-  // Screen 4, Account queue sorted by urgency
-  const s4=()=>{
-    const accounts=[{id:'ACC-73820',name:'Asset Manager · GB',st:'ngtt',p:'Urgent',t:'14 min',ents:6},{id:'ACC-91445',name:'Sovereign Wealth · AE',st:'review',p:'High',t:'8 min',ents:4},{id:'ACC-62180',name:'Hedge Fund · US',st:'review',p:'Medium',t:'11 min',ents:6},{id:'ACC-84201',name:'Pension Fund · US',st:'gtt',p:'Low',t:'2 min',ents:6},{id:'ACC-55931',name:'Family Office · CH',st:'gtt',p:'Low',t:'3 min',ents:3}];
-    const pc={Urgent:R,High:R,Medium:A,Low:D};
-    return `<div style="width:100%;height:100%;background:${B};display:flex;flex-direction:column;font-family:system-ui,sans-serif;overflow:hidden">
-      <div style="padding:9px 14px;border-bottom:1px solid ${BR};display:flex;align-items:center;gap:10px"><span style="font-size:10px;color:${T};font-weight:500">Account queue</span><span style="font-size:9px;color:${D}">23 accounts · ranked by decision urgency</span><div style="margin-left:auto;display:flex;gap:5px">${['All','Needs action','GTT','NGTT'].map((l,i)=>`<button style="padding:3px 8px;border-radius:3px;border:1px solid ${i===0?`rgba(96,165,250,0.4)`:BR};background:${i===0?`rgba(96,165,250,0.1)`:S};font-size:8px;color:${i===0?BL:D};text-transform:uppercase;letter-spacing:0.06em;cursor:pointer;font-family:system-ui">${l}</button>`).join('')}</div></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 88px 72px 65px;padding:5px 14px;border-bottom:1px solid ${BR}">${['Account','Status','Entities','Priority','Avg time'].map(h=>`<span style="font-size:8px;color:${D};text-transform:uppercase;letter-spacing:0.08em">${h}</span>`).join('')}</div>
-      <div style="flex:1;overflow:auto">${accounts.map((a,i)=>`<div style="display:grid;grid-template-columns:1fr 1fr 88px 72px 65px;padding:9px 14px;border-bottom:1px solid ${BR};align-items:center;${i===0?'background:rgba(239,68,68,0.04)':''}"><div><div style="font-size:9.5px;color:${T};font-weight:500;font-family:'DM Mono',monospace">${a.id}</div><div style="font-size:8.5px;color:${D};margin-top:1px">${a.name}</div></div><div>${badge(a.st,a.st==='gtt'?'GTT':a.st==='ngtt'?'NGTT':'Review')}</div><div style="font-size:9px;color:${D}">${a.ents} entities</div><div style="font-size:9px;color:${pc[a.p]};font-weight:${a.p==='Urgent'||a.p==='High'?600:400}">${a.p}</div><div style="font-size:9px;color:${D}">${a.t}</div></div>`).join('')}</div>
-    </div>`;
-  };
-
-  return [s1(),s2(),s3(),s4()];
-})();
-
-// ───── CASE DATA ─────
-const CASE_ORDER = ['bofa','adarma','silico','psa','highland','emerios'];
-
-const CASES_DATA = {
-  bofa: {
-    title: "Bank Of America",
-    role: "Senior UX Engineer · Sep 2024–Dec 2025",
-    icon: "cases/bofa-icon.svg",
-    idx: "01/07", company: "Bank of America", range: "2024–2025",
-    cardTitle: "Good-to-trade portal for institutional trading",
-    tags: ["FinTech","Compliance UX","Data Visualisation","Multi-Stakeholder"],
-    outcome: "67% reduction in go/no-go decision time",
-    visual: "gtt",
-    overview: {
-      lede: "Redesigned the Good-to-Trade (GTT) compliance portal end-to-end. Simplified product taxonomy, made AML/KYC rule logic legible across legal entities, and cut decision time from 12 to 4 minutes. Partnered with Front Office, Operations, and Compliance.",
-      contextItems: [
-        "Traders making go/no-go decisions on accounts but data was fragmented across multiple upstream AML, KYC, and regulatory systems",
-        "Opaque internal codes (NGTT_RSN_47A) meant users needed a separate lookup to understand why an account was blocked",
-        "Three distinct user profiles, front-office traders (speed), operations (ownership), compliance (evidence), each with different needs from the same interface",
-        "Average decision time: 12 minutes. No clear escalation paths"
-      ],
-      changedItems: [
-        "Compliance matrix: accounts, booking entities, and products as selectable inputs. Rules as rows, legal entity markets as columns (MLI, BAMLI, DAC, BKNA, MLCI, MLJS)",
-        "Green check (GTT), red cross with plain-language reason (NGTT), amber warning, all inline, no secondary lookups",
-        "Column headers show the overall trading status per entity at a glance",
-        "Unified taxonomy matching how FO/Ops/Compliance think about restrictions, plain language replacing internal codes"
-      ],
-      roleText: "End-to-end: worked with traders, ops managers, compliance SMEs, and product leadership. Extended the Helix design system with compliance-specific tokens and patterns. Worked directly in the codebase throughout."
-    },
-    process: {
-      steps: [
-        ["Discovery","Shadowed traders during live trading hours. Structured interviews with compliance SMEs to map all rule categories and exception flows"],
-        ["Definition","Taxonomy audit, mapped 47+ NGTT reason codes to plain-language equivalents. Validated with traders and compliance"],
-        ["Exploration","Multiple IA approaches for the compliance matrix. Killed table-only views that hid overall status. Killed form-heavy approaches that slowed scanning"],
-        ["Systemisation","Extended Helix design system with compliance-specific tokens. All implemented in Storybook"],
-        ["Validation","Task-based walkthroughs with FO traders (speed), operations managers (ownership), and compliance reviewers (evidence)"]
-      ],
-      tools: ["Figma","Angular","Material Design","Storybook","GitHub Copilot"]
-    },
-    screens: [
-      {html: BOFA_SCREENS[0], cap:"Compliance matrix, GTT / NGTT / amber status by rule and legal entity"},
-      {html: BOFA_SCREENS[1], cap:"NGTT restriction detail, plain-language reason and escalation path"},
-      {html: BOFA_SCREENS[2], cap:"Taxonomy audit, 47 opaque codes mapped to plain language"},
-      {html: BOFA_SCREENS[3], cap:"Account queue, 23 accounts ranked by decision urgency"}
-    ],
-    impact: [
-      ["Decision Speed","Average go/no-go time dropped from 12 to 4 minutes, 67% reduction. Traders stopped needing secondary lookups for blocked accounts."],
-      ["Taxonomy Clarity","47+ opaque internal codes (e.g. NGTT_RSN_47A) replaced with plain-language reasons. Compliance SMEs confirmed zero training overhead on the new system."],
-      ["Design System","Compliance-specific token set and component patterns merged into Helix. Two adjacent trading teams adopted the patterns within 3 months of launch."],
-      ["Stakeholder Alignment","Three distinct user profiles, front-office traders, operations managers, compliance reviewers, consolidated into one portal. Eliminated the previous three-tool workflow."]
-    ],
-    retrospective: {
-      title:"What I'd do differently",
-      points:[
-        "I'd push earlier for quantified SLA data from Ops before the design phase. We had qualitative signal but the 12-minute baseline came late, having it in week one would have sharpened the IA decisions.",
-        "The compliance matrix works well for desktop. I deprioritised mobile because traders work at desks, but operations managers sometimes need to act remotely. I'd scope a responsive variant sooner.",
-        "I killed the form-heavy approach in round two, but I should have stress-tested it with a compliance reviewer first. The data told the same story, but having the user session as evidence would have accelerated sign-off."
-      ]
-    },
-    timeline: [
-      ["Sep–Oct 2024","Discovery, trader shadowing, compliance SME interviews, taxonomy audit"],
-      ["Nov–Dec 2024","IA definition, matrix exploration, Helix system extension"],
-      ["Jan–Mar 2025","Prototype validation, trader walkthroughs, front-end implementation"],
-      ["Apr–Dec 2025","Rollout, iteration, pattern reuse across adjacent workflows"]
-    ]
-  },
-  adarma: {
-    title:"Adarma", role:"Senior Product Designer · Aug 2023–Sep 2024",
-    icon:"cases/adarma-icon.png",
-    idx:"02/07", company:"Adarma", range:"2023–2024",
-    cardTitle:"Cybersecurity ops platform, zero to one",
-    tags:["Cybersecurity","Design Systems","UX Research","0 To 1"],
-    outcome:"Zero-to-one platform · enterprise contracts renewed post-launch",
-    visual:"shield",
-    overview:{
-      lede:"Security-operations dashboards to help analysts and managers see posture, triage alerts, and track incident response in one place, built for speed, clarity, and repeatability.",
-      contextItems:[
-        "Fragmented views across SIEM, ticketing, and reporting made triage slow and inconsistent",
-        "Alert floods hid true priority; ownership and next steps were unclear",
-        "Leadership lacked a trustworthy state-of-posture view to steer action"
-      ],
-      changedItems:[
-        "Unified workspace: posture, alerts, cases, and trends in a single, role-aware view",
-        "Clear priority model with progressive disclosure (signal → rationale → next action)",
-        "Ownership routing (who, by when) and lightweight playbook cues in-context",
-        "Tokenised, reusable UI patterns for rapid iteration across modules"
-      ],
-      roleText:"End-to-end as the sole designer: clarified requirements with SOC analysts and managers, defined IA and interaction patterns, designed the dashboards, built the design system, and worked embedded with engineering with no handoffs.",
-      img:"cases/adarma-1.png",
-      imgCap:"Threat triage dashboard, MITRE ATT&CK coverage view + live alert queue"
-    },
-    process:{
-      steps:[
-        ["Discovery","SME interviews with SOC L1–L3 analysts and IR leads, tool/notification audit, review of typical playbooks"],
-        ["Definition","IA for role-aware views (Analyst, Lead, Manager) and a common priority model"],
-        ["Exploration","Low-fi flows → interactive prototypes; killed concepts that added clicks or hid context"],
-        ["Systemisation","Design tokens + component patterns (status chips, evidence panels, trend bands)"],
-        ["Validation","Task-based walkthroughs; refined copy, keyboard paths, and empty/error/loading states"]
-      ],
-      tools:["Figma/FigJam","Design Tokens","Svelte","Storybook","Claude"]
-    },
-    screens:[
-      {img:"cases/adarma-1.png", cap:"Threat triage dashboard, MITRE ATT&CK coverage + live alert queue"},
-      {img:"cases/adarma-2.png", cap:"Threat analysis, detection coverage and impact factors"},
-      {img:"cases/adarma-3.png", cap:"SLA governance, breach / at-risk / on-track view"},
-      {img:"cases/adarma-4.png", cap:"Posture overview, risk scores with owners and due dates"}
-    ],
-    impact:[
-      ["Operational Speed","Consolidated signal, rationale, and next action into one view. Analysts stopped switching between SIEM, ticketing, and reporting tools mid-triage, estimated 40%+ reduction in tool context-switches per shift."],
-      ["Quality & Risk","Role-aware priority model reduced mis-routed alerts. Enterprise clients reported fewer containment errors in post-launch reviews."],
-      ["SLA Reliability","Ownership routing and due-date visibility made on-time closures trackable for the first time. SLA breach rate dropped visibly within the first quarter after rollout."],
-      ["Design System","Token-driven component library built from zero. Accelerated delivery of three additional modules post-launch. Two enterprise clients renewed and expanded contracts directly citing the new platform."]
-    ],
-    retrospective:{
-      title:"What I'd do differently",
-      points:[
-        "I was the sole designer embedded with engineering from day one, which was fast but created a bottleneck on design decisions. Earlier on I'd push to document decision rationale in shared artefacts so engineers could move without me in scope.",
-        "The role-aware views (Analyst / Lead / Manager) were validated in walkthroughs but not A/B tested at rollout. I'd instrument baseline task-completion times before launch so we could prove the improvement numerically, not just qualitatively.",
-        "The design system started as a by-product of the product work. If I did it again I'd scope it as a parallel workstream from sprint one, the token structure we retrofitted mid-project cost two weeks."
-      ]
-    },
-    timeline:[
-      ["Q1 2024","Discovery & SME interviews, SOC analyst shadowing, tool audit"],
-      ["Q2 2024","Prototypes & design system built from zero, Storybook implementation"],
-      ["Q3 2024","Pilot & rollout, enterprise client validation, contracts renewed"]
-    ]
-  },
-  silico: {
-    title:"SilicoAI", role:"UX Engineer · Dec 2020–Jun 2023",
-    icon:"cases/silico-icon.svg",
-    idx:"03/07", company:"SilicoAI", range:"2020–2023",
-    cardTitle:"Decision-intelligence platform for scenario planning",
-    tags:["AI Products","Enterprise B2B","UX Engineering"],
-    outcome:"3 years end-to-end ownership · faster time-to-decision for operators",
-    visual:"chart",
-    overview:{
-      lede:"Decision-intelligence dashboards and workflows that let operators and leaders explore 'what-if' scenarios, understand drivers, and choose the next best action with confidence.",
-      contextItems:[
-        "Insights split across models, spreadsheets, and BI views, making scenario planning slow and inconsistent",
-        "Users couldn't see drivers vs outcomes or how changing one lever flowed through the system",
-        "Collaboration friction: results weren't easy to share, compare, or explain to non-modellers"
-      ],
-      changedItems:[
-        "Unified workspace: models, scenarios, and KPIs together with a shared interaction pattern",
-        "Driver trees + scenario controls with progressive disclosure (assumptions → impact → risk)",
-        "Clear comparison views (baseline vs scenario) and annotated 'why' explanations",
-        "Tokenised, reusable UI patterns for charts, deltas, sensitivities, and 'next action' prompts"
-      ],
-      roleText:"End-to-end ownership across 3 years: problem framing, UX research, interaction design, design system, and front-end implementation. High autonomy in a fully remote distributed environment.",
-      img:"cases/silico-1.svg",
-      imgCap:"Scenario workspace, driver controls, baseline vs scenario comparison, delta chips"
-    },
-    process:{
-      steps:[
-        ["Discovery","Interviews with modellers, ops, and exec users. Audit of current models, dashboards, and handoffs"],
-        ["Definition","IA for models → drivers → scenarios → KPIs. Standardised comparison and explanation patterns"],
-        ["Exploration","Low-fi sketches → interactive prototypes. Killed paths that hid assumptions or slowed iteration"],
-        ["Systemisation","Design tokens + component patterns (driver controls, delta chips, compare panels)"],
-        ["Validation","Task-based reviews, empty/error/loading states, keyboard paths, chart annotations"]
-      ],
-      tools:["Figma/FigJam","Design Tokens","React/Next.js","TypeScript","SCSS","Storybook","Recharts/D3","Claude"]
-    },
-    screens:[
-      {img:"cases/silico-1.svg", cap:"Scenario workspace, driver controls and KPI comparison"},
-      {img:"cases/silico-2.svg", cap:"Driver tree, lever impact and sensitivity visualisation"},
-      {img:"cases/silico-3.svg", cap:"Baseline vs scenario, annotated delta chips"},
-      {img:"cases/silico-4.svg", cap:"Sensitivity view, brittle scenario highlights"},
-      {img:"cases/silico-5.svg", cap:"KPI dashboard, performance indicators"},
-      {img:"cases/silico-6.svg", cap:"Scenario comparison, side-by-side view"},
-      {img:"cases/silico-7.svg", cap:"Driver controls, lever interaction"},
-      {img:"cases/silico-8.svg", cap:"Impact analysis, downstream effects"},
-      {img:"cases/silico-9.svg", cap:"Model configuration, input parameters"},
-      {img:"cases/silico-10.svg", cap:"Scenario planning workspace"},
-      {img:"cases/silico-11.svg", cap:"Risk assessment view"},
-      {img:"cases/silico-12.svg", cap:"Performance metrics, trend view"},
-      {img:"cases/silico-13.svg", cap:"Decision support dashboard"},
-      {img:"cases/silico-14.svg", cap:"Scenario explorer, multi-run comparison"},
-      {img:"cases/silico-15.svg", cap:"Analytics overview"},
-      {img:"cases/silico-16.svg", cap:"System configuration"},
-      {img:"cases/silicosystem-1.svg", cap:"Design system, component library"},
-      {img:"cases/silicosystem-2.svg", cap:"Design system, pattern documentation"},
-      {img:"cases/silicosystem-3.svg", cap:"Design system, token structure"},
-      {img:"cases/silicosystem-4.svg", cap:"Design system, component states"}
-    ],
-    impact:[
-      ["Operational Speed","Shorter path from question → model run → decision by consolidating drivers, KPIs, and comparisons."],
-      ["Quality & Risk","Clear assumptions and provenance reduced misinterpretation. Sensitivity views highlighted brittle scenarios early."],
-      ["Adoption","Scenario workspace became the default for planning discussions. Patterns reused as the product grew."],
-      ["Design System","Token-driven components ensured consistency across all data views throughout 3 years of product evolution."]
-    ],
-    timeline:[]
-  },
-  psa: {
-    title:"PSA / Peugeot", role:"Product Designer · Band Of Coders",
-    icon:"cases/psa-icon.svg",
-    idx:"04/07", company:"PSA / Peugeot", range:"E-commerce",
-    cardTitle:"Two e-commerce flows for automotive",
-    tags:["E-Commerce","Multi-Step Flows","Conversion UX"],
-    outcome:"Two end-to-end e-commerce flows · reduced drop-off from discovery to checkout",
-    visual:"cart",
-    overview:{
-      lede:"Two connected e-commerce experiences: AFS (book an at-home mechanic) and Peugeot Online Purchase (configure and buy a vehicle end-to-end). Both reduce friction from discovery to confirmation.",
-      contextItems:[
-        "AFS: Service booking required multiple phone/email handoffs. Address/ZIP and geolocation errors stalled bookings",
-        "Peugeot Online Purchase: Vehicle purchase journeys fragmented across brochures, dealers, and calculators. Users couldn't compare versions, packages, and payments in one flow"
-      ],
-      changedItems:[
-        "AFS: Guided funnel, location → vehicle (VIN/model) → services → time → pay → confirm, with instant validation at each step",
-        "Peugeot: Single-flow configurator, model → version → packages → finance → checkout, with live price visible throughout"
-      ],
-      img:"cases/AFS-1.jpg",
-      imgCap:"AFS service booking (left) + Peugeot Online Purchase configurator (right)"
-    },
-    process:{
-      steps:[
-        ["Discovery & alignment","SME interviews (agents, reviewers, ops) → goals, constraints, compliance needs"],
-        ["Workflow mapping","Current → future flows across capture → classify → approve. Identified failure modes and handoff gaps"],
-        ["IA & taxonomy","Standardised proof types, statuses, and document metadata for consistent handling"],
-        ["Design system","Tokenised option tiles, calendars, price rows, and summary panels"],
-        ["Prototype & validate","Low-fi → interactive. Tested tasks, refined copy, states, keyboard paths, focus order"]
-      ],
-      tools:["Figma/FigJam","Design Tokens","React","TypeScript"]
-    },
-    screens:[
-      {img:"cases/AFS-1.jpg", cap:"AFS + Peugeot, connected service and purchase flows"},
-      {img:"cases/AFS-2.jpg", cap:"AFS, location search and vehicle selection"},
-      {img:"cases/AFS-3.jpg", cap:"AFS, service selection and time booking"},
-      {img:"cases/AFS-4.jpg", cap:"AFS, booking confirmation and payment"},
-      {img:"cases/AFS-5.jpg", cap:"AFS, technician matching and profile cards"},
-      {img:"cases/AFS-6.jpg", cap:"AFS, geolocation and service radius"},
-      {img:"cases/AFS-7.jpg", cap:"AFS, flow summary"},
-      {img:"cases/psa-1.jpg", cap:"Peugeot Online Purchase, model configurator"},
-      {img:"cases/psa-2.jpg", cap:"Peugeot, version and package selection"},
-      {img:"cases/psa-3.jpg", cap:"Peugeot, finance options with live pricing"},
-      {img:"cases/psa-4.jpg", cap:"Peugeot, checkout flow"},
-      {img:"cases/psa-5.jpg", cap:"Peugeot, order confirmation"}
-    ],
-    impact:[
-      ["Operational Speed","Users complete bookings and configurations faster thanks to guided steps and instant validation."],
-      ["Quality & Risk","Fewer misroutes by surfacing address/VIN errors early and explaining package impacts before checkout."],
-      ["SLA Reliability","More on-time appointments as the flow locks location, services, and timeslot with a clear confirmation."],
-      ["Design System","Consistent, token-driven components reused across service and commerce surfaces."]
-    ],
-    timeline:[]
-  },
-  highland:{
-    title:"Highland Easy Life", role:"Senior UX/UI Developer · Aug 2019–Dec 2020",
-    icon:"cases/highland-icon.jpeg",
-    idx:"05/07", company:"Highland Easy Life", range:"2019–2020",
-    cardTitle:"Quick-quote flow and broker dashboard",
-    tags:["Insurance","Broker Dashboard","Conversion"],
-    outcome:"Reduced quote abandonment · broker follow-up time cut significantly",
-    visual:"doc",
-    overview:{
-      lede:"Multi-carrier life insurance quote tool with companion broker dashboard. Consumers get a quick estimate, refine answers, and compare carriers. Brokers see leads, status, and next actions in one workspace.",
-      contextItems:[
-        "Consumers bounced between forms and carrier pages. Quotes weren't comparable or easy to refine",
-        "Brokers lacked a unified view of lead details, health class, premium, term, and status, slowing follow-up"
-      ],
-      changedItems:[
-        "Guided Learn → Refine → Review quote flow with live premium ranges and clear monthly comparisons across carriers",
-        "Broker ELA Dashboard with sortable leads, confidence signals, and quick actions (Quote & Apply) without leaving the dashboard"
-      ],
-      roleText:"End-to-end: UX for quote and broker flows, UI implementation with token-driven components, accessibility states, and handoff documentation.",
-      img:"cases/highland-8.jpg",
-      imgCap:"Quick quote, Review step and carrier comparison"
-    },
-    process:{
-      steps:[
-        ["Discovery","Broker interviews to understand lead prioritisation, common failure modes, key data points needed per lead"],
-        ["Definition","IA for Learn → Refine → Review consumer flow. Broker dashboard focused on scannable lead list with contextual actions"],
-        ["Exploration","Quick-quote flow tested with consumers at low-fi. Multiple broker dashboard layouts, table vs card vs hybrid"],
-        ["Systemisation","Tokenised tables, chips, and summary panels across consumer and broker surfaces"],
-        ["Validation","Task-based walkthroughs with brokers. Refined copy, empty states, keyboard paths"]
-      ],
-      tools:["Figma","Design Tokens","React","SCSS"]
-    },
-    screens:[
-      {img:"cases/highland-1.jpg", cap:"Broker ELA dashboard, lead management with confidence signals"},
-      {img:"cases/highland-6.jpg", cap:"Quick quote, Learn step"},
-      {img:"cases/highland-7.jpg", cap:"Quick quote, Refine step"},
-      {img:"cases/highland-8.jpg", cap:"Quick quote, Review and carrier comparison"},
-      {img:"cases/highland-9.jpg", cap:"Lead detail panel, health class, term, status"},
-      {img:"cases/highland-10.jpg", cap:"Broker dashboard, mobile view"},
-      {img:"cases/easylife-1.png", cap:"EasyLife, quote flow overview"},
-      {img:"cases/easylife-2.png", cap:"EasyLife, carrier comparison"},
-      {img:"cases/easylife-3.png", cap:"EasyLife, lead management"},
-      {img:"cases/easylife-4.png", cap:"EasyLife, broker tools"},
-      {img:"cases/easylife-5.png", cap:"EasyLife, dashboard summary"}
-    ],
-    impact:[
-      ["Operational Speed","Consumers move from estimate to carrier selection faster. Brokers see all lead context without system-hopping."],
-      ["Quality & Risk","Structured refine questions reduce bad inputs. Broker view lowers mis-prioritised outreach."],
-      ["SLA Reliability","Clear status and next actions help brokers respond within SLAs. Consumer flow reduces abandon during refine."],
-      ["Design System","Tokenised tables, chips, and summary panels reused across consumer and broker surfaces."]
-    ],
-    timeline:[]
-  },
-  emerios:{
-    title:"Emerios", role:"Senior UX/UI Developer · Dec 2013–Mar 2017",
-    icon:"cases/emerios-icon.svg",
-    idx:"06/07", company:"Emerios", range:"2013–2017",
-    cardTitle:"Enrollment and compliance for regulated providers",
-    tags:["Compliance","TPV Verification","B2B SaaS"],
-    outcome:"Back-office review time halved · audit-ready proof records across 3 products",
-    visual:"flow",
-    overview:{
-      lede:"Agent Vault, Back-Office console, and SafeLink Enrollment, centralising identity proofs and regulatory workflows so cases move faster and audits are simpler.",
-      contextItems:[
-        "Sensitive proofs scattered across email/folders slowed retrieval and increased compliance risk",
-        "Back-office reviewers had to jump between pages to classify proofs and resolve errors",
-        "Applicants struggled to submit documentation from the devices/channels they actually had"
-      ],
-      changedItems:[
-        "Centralised, searchable Vault with structured metadata, versioning, and quick actions",
-        "Single-screen document processing with required-proof checklist, page carousel, and standardised reasons",
-        "Multi-channel enrollment (web, mobile, agent-assisted) with consistent step structure and validation"
-      ],
-      roleText:"End-to-end across three products: requirements, IA, interaction design, UI implementation, and front-end development. Also mentored junior designers and set design standards across the team.",
-      img:"cases/emerios-1.jpg",
-      imgCap:"Agent Vault, centralised case management with proof checklist and audit-ready document view"
-    },
-    process:{
-      steps:[
-        ["Discovery","Interviews with agents, back-office reviewers, and compliance auditors. Mapped all proof types, rejection reasons, and escalation paths"],
-        ["Definition","IA for capture → classify → approve workflow. Standardised proof taxonomy across all three products"],
-        ["Exploration","Multiple document review UX approaches, killed modal-heavy flows, kept single-screen carousel with checklist"],
-        ["Systemisation","Tokenised status chips, proof type badges, and action buttons. Consistent across Vault, Back-Office, and Enrollment"],
-        ["Validation","Task-based walkthroughs with agents and reviewers. Measured time-to-complete per case type"]
-      ],
-      tools:["Figma","Design Tokens","Angular","SCSS","Ionic"]
-    },
-    screens:[
-      {img:"cases/emerios-1.jpg", cap:"Agent Vault, case management with centralised proof checklist"},
-      {img:"cases/emerios-2.jpg", cap:"Back-Office, single-screen document processing"},
-      {img:"cases/emerios-3.jpg", cap:"SafeLink Enrollment, multi-channel submission flow"},
-      {img:"cases/emerios-4.jpg", cap:"Vault search, structured metadata and versioning"},
-      {img:"cases/emerios-5.jpg", cap:"Document classification, proof type review"},
-      {img:"cases/emerios-6.jpg", cap:"Case timeline, audit trail view"},
-      {img:"cases/emerios-7.jpg", cap:"Enrollment, multi-channel step structure"},
-      {img:"cases/emerios-8.jpg", cap:"Back-office, page carousel and checklist"},
-      {img:"cases/emerios-9.jpg", cap:"Proof management, status and actions"},
-      {img:"cases/emerios-10.jpg", cap:"Compliance dashboard, case status overview"},
-      {img:"cases/emerios-11.jpg", cap:"Agent interface, quick actions"},
-      {img:"cases/emerios-12.jpg", cap:"Enrollment, validation states"},
-      {img:"cases/emerios-13.jpg", cap:"Vault, document retrieval and audit"}
-    ],
-    impact:[
-      ["Operational Speed","Faster case processing by centralising proof retrieval. Single-screen review reduced back-office time per case."],
-      ["Audit Quality","Structured metadata, versioning, and standardised reasons made proof records audit-ready without extra documentation."],
-      ["Compliance","Centralised vault with access controls and audit log met regulatory requirements for all regulated service providers."],
-      ["Design System","Token-driven components reused across Vault, Back-Office, and Enrollment, accelerating new feature delivery."]
-    ],
-    timeline:[
-      ["2013–2014","Agent Vault, discovery, IA, implementation"],
-      ["2014–2015","Back-Office console, single-screen document processing"],
-      ["2015–2017","SafeLink Enrollment, multi-channel flow, design system unification"]
-    ]
-  },
-  more:{
-    title:"More Works", role:"Various Projects",
-    icon:"cases/waggl-1.jpg",
-    idx:"07/07", company:"Various Projects", range:"",
-    cardTitle:"Product concepts, event sites & prototypes",
-    tags:["Prototypes","Concepts","UI Patterns"],
-    outcome:"8 projects across SaaS, events, infrastructure & sales tools",
-    visual:"img",
-    projectTabs:[
-      {
-        name:"Waggl",
-        lede:"Engagement platform for real-time employee feedback and idea crowdsourcing.",
-        context:"Teams lacked a fast, low-friction way to surface ideas and gauge sentiment across the organisation.",
-        did:"Designed the feedback feed, voting UI, and results dashboard. Focused on low-friction input and clear signal aggregation.",
-        outcome:"Rapid idea prioritisation with high participation rates.",
-        imgs:[{img:"cases/waggl-1.jpg", cap:"Waggl, employee feedback and crowdsourcing platform"}]
-      },
-      {
-        name:"Arc10 / Careerlist",
-        lede:"HR platform for team dynamics matching and talent discovery — same product, rebranded from Arc10 to Careerlist mid-project.",
-        context:"Hiring managers lacked tools to evaluate team fit beyond CVs. Most matching was unstructured with no dynamics or culture layer.",
-        did:"Designed the candidate profile, team-fit score, and structured comparison view. Focused on reducing bias through signal rather than gut feel. Worked through the rebrand without disrupting the design system.",
-        outcome:"Structured team-fit evaluation replacing unstructured interview-only screening.",
-        imgs:[{img:"cases/arc10-1.jpg", cap:"Arc10 / Careerlist, leader profile and team-fit matching"}]
-      },
-      {
-        name:"Openstack",
-        lede:"Event website for the OpenStack Summit Berlin 2018.",
-        context:"The open source infrastructure community needed a high-traffic conference site covering schedule, sponsors, travel, and ticket registration.",
-        did:"Designed and built the summit website: hero, schedule, sponsor tiers, and registration flow. Optimised for global traffic across time zones.",
-        outcome:"Live for the Berlin 2018 summit with 200+ sessions and workshops.",
-        imgs:[{img:"cases/openstack-1.jpg", cap:"OpenStack Summit Berlin 2018, conference website"}]
-      },
-      {
-        name:"Conaroy",
-        lede:"B2B sales enablement tool for structured deal tracking and pipeline management.",
-        context:"Sales teams tracked deals in spreadsheets with no visibility into deal health, next steps, or blockers.",
-        did:"Designed the deal pipeline, contact timeline, and activity log with inline actions and stage progression.",
-        outcome:"Clearer pipeline visibility and faster deal progression.",
-        imgs:[]
-      },
-    ]
-  }
-};
-
-// Keep the old CASES array shape that the cards renderer expects
+// Level-1 Works-grid card data, derived from CASES_DATA (loaded from content/cases/)
 const CASES = CASE_ORDER.map(id => {
   const d = CASES_DATA[id];
   return {
     id, idx:d.idx, company:d.company, range:d.range,
     title:d.cardTitle, tags:d.tags, outcome:d.outcome, visual:d.visual,
-    img:d.overview?.img || d.icon || null
+    shift: d.shift || null, // one-line before→after statement
+    img: d.tileImage || d.icon || null // tileImage (e.g. a real Figma screenshot) takes priority over the small logo icon
   };
 });
 
@@ -1249,6 +1688,7 @@ worksList.innerHTML = CASES.map((c, i) => {
           <span class="case-company">${c.company} · ${c.range}</span>
         </div>
         <h3>${c.title}</h3>
+        ${c.shift ? `<p class="case-shift">${c.shift}</p>` : ""}
         <div class="case-tags">${c.tags.map(t=>`<span class="chip">${t}</span>`).join("")}</div>
         <div class="case-outcome">
           <span>Outcome</span>
@@ -1262,8 +1702,8 @@ worksList.innerHTML = CASES.map((c, i) => {
 }).join("");
 
 function renderVisual(c){
-  if (c.visual === "gtt") return `<div style="width:100%;height:100%;overflow:hidden;transform-origin:top left;position:relative"><div style="transform:scale(0.52);transform-origin:top left;width:192%;pointer-events:none">${BOFA_SCREENS[0]}</div></div>`;
-  if (c.img) return `<img src="${c.img}" alt="${c.company}" style="width:100%;height:100%;object-fit:cover;display:block;">`;
+  if (c.visual === "socket") return `<div style="width:100%;height:100%;overflow:hidden;transform-origin:top left;position:relative"><div style="transform:scale(0.52);transform-origin:top left;width:192%;pointer-events:none">${SOCKET_SCREENS[0]}</div></div>`;
+  if (c.img) return `<img src="${c.img}" alt="${c.company}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">`;
   return `
     <div class="visual-placeholder">
       ${ICONS[c.visual] || ICONS.image}
@@ -1326,14 +1766,29 @@ document.getElementById("skillsFE").innerHTML = SKILLS.fe.map(s=>`<span class="s
 document.getElementById("skillsAI").innerHTML = SKILLS.ai.map(([s,p])=>`<span class="skill-chip${p?" primary":""}">${s}</span>`).join("");
 
 // ───── EXPERIENCE ─────
+// ───── OPERATING PRINCIPLES ─────
+// [title, description, evidencing case id, case label]
+const PRINCIPLES = [
+  ["Legibility is the product", "the data existed, nobody could read it fast enough to act", "bofa", "Bank of America"],
+  ["If it preserves the old problem, kill it", "a prettier version of a broken structure is still broken", "emerios", "Emerios"],
+  ["Systems are how one designer scales", "documentation and tokens let engineering, and a successor, move without me in the room", "adarma", "Adarma"],
+  ["Progressive disclosure over dashboards that shout", "glance, then inspector, then history — depth is there when it's needed, not competing for attention when it isn't", "silico", "SilicoAI"]
+];
+document.getElementById("principlesList").innerHTML = PRINCIPLES.map(([title,desc,caseId,caseLabel])=>`
+  <div class="principle">
+    <div class="principle-t">${title}<span> — ${desc}.</span></div>
+    <button class="principle-link" onclick="openCase('${caseId}')">${caseLabel} →</button>
+  </div>
+`).join("");
+
 const EXP = [
   ["Bank of America","Sep 2024–Dec 2025","London","Senior UX Engineer","GTT portal redesign, design system extension. 67% reduction in decision time."],
   ["Adarma","Aug 2023–Sep 2024","London","Senior Product Designer","Sole designer on cybersecurity operations platform. Built design function from zero. Clients renewed."],
   ["SilicoAI","Dec 2020–Jun 2023","London","UX Engineer","AI-native enterprise B2B platform. End-to-end design and front-end engineering."],
   ["Band of Coders","Oct 2019–Jan 2021","Remote","Senior UX/UI Developer","B2B SaaS enterprise clients including PSA / Peugeot and Highland Easy Life."],
-  ["Tipit","Dec 2017–Aug 2019","Remote","Senior UX/UI Developer","Events-as-a-service products."],
-  ["CareerList","Mar 2017–Dec 2017","Remote","Senior UX/UI Developer","HR platform, team dynamics matching."],
-  ["Emerios","Dec 2013–Mar 2017","Buenos Aires","Senior UX/UI Developer","B2B customer enrollment and TPV compliance platform."],
+  ["Tipit","Dec 2017–Aug 2019","Remote","UX Designer","Events-as-a-service products."],
+  ["CareerList","Mar 2017–Dec 2017","Remote","UX Designer","HR platform, team dynamics matching."],
+  ["Emerios","Dec 2013–Mar 2017","Buenos Aires","UX/UI Developer → Senior UX/UI Developer","B2B customer enrolment and TPV compliance platform. Promoted to Senior during the role."],
   ["Qubit.tv","May 2011–Dec 2013","Buenos Aires","UX/UI Developer","TV-on-demand streaming platform."]
 ];
 document.getElementById("expList").innerHTML = EXP.map(([co,dt,loc,role,desc])=>`
@@ -1409,136 +1864,160 @@ const impactIcons = [
   `<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>`
 ];
 
-function renderOverview(d){
-  const ov = d.overview;
+// ───── NEW-ARC HELPERS (Snapshot / Before / What I Did / After + Impact) ─────
+// Single choke point: any field that is missing or empty is treated as absent,
+// so callers can render a graceful fallback instead of an empty label or box.
+function isTodo(v){
+  if (v === null || v === undefined || v === "") return true;
+  if (Array.isArray(v)) return v.length === 0;
+  return false;
+}
+
+function renderCarousel(screens){
+  if (!screens || !screens.length) return "";
+  const slides = screens.map(s => {
+    const inner = s.html
+      ? `<div class="ratio" style="overflow:hidden">${s.html}</div>`
+      : s.img
+        ? `<div class="ratio"><img src="${s.img}" alt="${s.cap||''}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=&quot;cs-carousel-ph&quot;>${placeholderIconSVG.replace(/"/g,'&quot;').replace(/'/g,'&apos;')}<span>${(s.cap||'').replace(/'/g,'&apos;')}</span></div>'"/></div>`
+        : `<div class="ratio"><div class="cs-carousel-ph">${placeholderIconSVG}<span>${s.cap||''}</span></div></div>`;
+    return `<div class="cs-carousel-slide">${inner}${s.cap?`<div class="cs-carousel-cap">${s.cap}</div>`:""}</div>`;
+  }).join("");
+  const multi = screens.length > 1;
+  return `<div class="cs-carousel">
+    <div class="cs-carousel-vp"><div class="cs-carousel-track">${slides}</div></div>
+    ${multi ? `<div class="cs-carousel-nav">
+      <button class="cs-carousel-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button class="cs-carousel-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+    <div class="cs-carousel-dots">${screens.map((_,i)=>`<button class="cs-carousel-dot${i===0?' active':''}" data-i="${i}" aria-label="Slide ${i+1}"></button>`).join("")}</div>` : ""}
+  </div>`;
+}
+
+function renderFigmaLink(url, label){
+  if (isTodo(url)) return "";
+  const icon = `<svg class="cs-figma-icon" viewBox="0 0 38 57" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1abcfe"/>
+    <path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" fill="#0acf83"/>
+    <path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#ff7262"/>
+    <path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#f24e1e"/>
+    <path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#a259ff"/>
+  </svg>`;
+  return `<a class="cs-figma-link" href="${url}" target="_blank" rel="noopener">${icon}<span>View ${label||''} in Figma</span><span class="arr">↗</span></a>`;
+}
+
+function renderBefore(d){
+  const b = d.before || {};
   let html = "";
-  if (ov.disclaimer){
-    html += `<div style="display:flex;align-items:start;gap:10px;padding:12px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;margin-bottom:16px">
-      <svg style="width:14px;height:14px;stroke:var(--text-dim);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:1px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16v.5"/></svg>
-      <span style="font-family:'DM Mono',monospace;font-size:10.5px;color:var(--text-dim);line-height:1.6;letter-spacing:0.02em">${ov.disclaimer}</span>
-    </div>`;
+  if (!isTodo(d.stake)){
+    html += `<div class="cs-blk"><h4 class="cs-h">Why it mattered to the business</h4><p>${d.stake}</p></div>`;
   }
-  html += `<div class="cs-lede">${ov.lede}</div>`;
-  if (ov.contextItems && ov.contextItems.length){
-    html += `<div class="cs-blk"><h4 class="cs-h">Context & Problem</h4><ul>${ov.contextItems.map(i=>`<li>${i}</li>`).join("")}</ul></div>`;
+  if (!isTodo(b.problems)){
+    html += `<div class="cs-blk"><h4 class="cs-h">The problem</h4><ul>${b.problems.map(i=>`<li>${i}</li>`).join("")}</ul></div>`;
   }
-  if (ov.changedItems && ov.changedItems.length){
-    html += `<div class="cs-blk"><h4 class="cs-h">What We Changed</h4><ul>${ov.changedItems.map(i=>`<li>${i}</li>`).join("")}</ul></div>`;
+  if (!isTodo(b.forWhom)){
+    html += `<div class="cs-blk"><h4 class="cs-h">For whom</h4><p>${b.forWhom}</p></div>`;
   }
-  if (ov.roleText){
-    html += `<div class="cs-blk"><h4 class="cs-h">My Role</h4><p>${ov.roleText}</p></div>`;
+  if (!isTodo(b.whyItMattered)){
+    html += `<div class="cs-blk"><h4 class="cs-h">Why it mattered</h4><p>${b.whyItMattered}</p></div>`;
   }
-  if (ov.bodyText){
-    html += `<div class="cs-blk"><p>${ov.bodyText}</p></div>`;
+  if (!isTodo(b.screenshots)){
+    html += `<div class="cs-blk"><h4 class="cs-h">Before, evidence</h4>${renderCarousel(b.screenshots)}</div>`;
   }
-  if (ov.projects && ov.projects.length){
-    html += `<div class="cs-blk"><h4 class="cs-h">Projects</h4><div class="cs-projects">${ov.projects.map(([t,ctx,did,out])=>`
-      <div class="cs-proj">
-        <div class="cs-proj-t">${t}</div>
-        <div class="cs-proj-row"><span class="cs-proj-k">Context</span><span class="cs-proj-v">${ctx}</span></div>
-        <div class="cs-proj-row"><span class="cs-proj-k">What we did</span><span class="cs-proj-v">${did}</span></div>
-        <div class="cs-proj-row"><span class="cs-proj-k">Outcome</span><span class="cs-proj-v">${out}</span></div>
+  return html;
+}
+
+function renderWhatIDid(d){
+  let html = "";
+  const decisions = d.decisions || [];
+  if (decisions.length){
+    html += `<div class="cs-blk"><h4 class="cs-h">Pivotal decisions</h4><div class="cs-decisions">${decisions.map(dec => `
+      <div class="cs-decision">
+        <div class="cs-decision-t">${dec.title}</div>
+        <p class="cs-decision-why">${dec.why}</p>
+        ${!isTodo(dec.tradeoff) ? `<div class="cs-decision-row"><span class="cs-decision-k">Trade-off</span><span class="cs-decision-v">${dec.tradeoff}</span></div>` : ""}
+        ${!isTodo(dec.stakeholders) ? `<div class="cs-decision-row"><span class="cs-decision-k">Stakeholders</span><span class="cs-decision-v">${dec.stakeholders}</span></div>` : ""}
       </div>`).join("")}</div></div>`;
   }
-  return html;
-}
-
-function renderProcess(d){
+  if (!isTodo(d.influence)){
+    html += `<div class="cs-blk"><h4 class="cs-h">Influence</h4><p>${d.influence}</p></div>`;
+  }
   const p = d.process || {};
-  let html = "";
-  if (p.steps && p.steps.length){
-    html += `<div class="cs-blk"><h4 class="cs-h">Process</h4><ul>${p.steps.map(([t,desc])=>`<li><strong style="color:var(--text);font-weight:600">${t}:</strong> ${desc}</li>`).join("")}</ul></div>`;
-  }
-  if (p.text){
-    html += `<div class="cs-blk"><p>${p.text}</p></div>`;
-  }
-  if (p.tools && p.tools.length){
-    html += `<div class="cs-blk"><h4 class="cs-h">Tools</h4><div class="cs-tools">${p.tools.map(t=>`<span class="cs-tool">${t}</span>`).join("")}</div></div>`;
+  if (!isTodo(p.steps) || !isTodo(p.tools)){
+    html += `<details class="cs-details">
+      <summary class="cs-h">Process &amp; tools</summary>
+      ${!isTodo(p.steps) ? `<ul>${p.steps.map(([t,desc])=>`<li><strong style="color:var(--text);font-weight:600">${t}:</strong> ${desc}</li>`).join("")}</ul>` : ""}
+      ${!isTodo(p.tools) ? `<div class="cs-tools" style="margin-top:14px">${p.tools.map(t=>`<span class="cs-tool">${t}</span>`).join("")}</div>` : ""}
+    </details>`;
   }
   return html;
 }
 
-function renderScreens(d){
+function renderAfterImpact(d){
   let html = "";
-  // Results / impact list
-  if (d.impact && d.impact.length){
-    html += `<div class="cs-blk"><h4 class="cs-h">Results</h4><div class="cs-impact">${d.impact.map(([k,v],i)=>`<div class="cs-ic"><h5>${impactIcons[i%4]}${k}</h5><p>${v}</p></div>`).join("")}</div></div>`;
+  const after = d.after || {};
+  const snapshot = d.snapshot;
+  if (snapshot && !isTodo(snapshot.numbers)){
+    html += `<div class="cs-blk"><h4 class="cs-h">Snapshot</h4><div class="cs-snap-numbers">${snapshot.numbers.map(n=>`
+      <div class="cs-snap-n">
+        <div class="cs-snap-v">${n.value}</div>
+        <div class="cs-snap-l">${n.label}</div>
+        ${!isTodo(n.detail) ? `<div class="cs-snap-d">${n.detail}</div>` : ""}
+      </div>`).join("")}</div></div>`;
   }
-  if (d.outcomeText){
-    html += `<div class="cs-blk"><p>${d.outcomeText}</p></div>`;
+  if (!isTodo(after.summary)){
+    html += `<div class="cs-lede">${after.summary}</div>`;
   }
-  if (d.timeline && d.timeline.length){
+  if (after.disclaimer){
+    html += `<div class="cs-note">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>${after.disclaimer}</span>
+    </div>`;
+  }
+  if (!isTodo(after.screenshots)){
+    html += `<div class="cs-blk"><h4 class="cs-h">After, evidence</h4>${renderCarousel(after.screenshots)}${renderFigmaLink(after.figma, after.figmaLabel || "after")}</div>`;
+  }
+  const impact = d.impact || {};
+  if (!isTodo(impact.metrics)){
+    html += `<div class="cs-blk"><h4 class="cs-h">Impact</h4><div class="cs-impact">${impact.metrics.map(([k,v],i)=>`<div class="cs-ic"><h5>${impactIcons[i%4]}${k}</h5><p>${v}</p></div>`).join("")}</div>
+      ${!isTodo(impact.caveat) ? `<div class="cs-note cs-note-tight">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>${impact.caveat}</span>
+      </div>` : ""}
+    </div>`;
+  }
+  if (!isTodo(impact.qualitative)){
+    html += `<div class="cs-blk cs-retro">
+      <h4 class="cs-h">${impact.qualitativeTitle || "What I'd do differently"}</h4>
+      <ul>${impact.qualitative.map(p=>`<li>${p}</li>`).join("")}</ul>
+    </div>`;
+  }
+  if (!isTodo(d.timeline)){
     html += `<div class="cs-blk"><h4 class="cs-h">Timeline</h4><div class="cs-tl">${d.timeline.map(([when,what])=>`<div class="cs-tl-r"><div class="cs-tl-d">${when}</div><div class="cs-tl-t">${what}</div></div>`).join("")}</div></div>`;
   }
-  if (d.retrospective){
-    const retro = d.retrospective;
-    html += `<div class="cs-blk" style="background:var(--bg-card);border:1px solid var(--border);border-radius:2px;padding:24px;margin-top:4px">
-      <h4 class="cs-h" style="margin-bottom:16px">${retro.title}</h4>
-      <ul style="display:flex;flex-direction:column;gap:10px">${retro.points.map(p=>`<li style="font-size:13px;color:var(--text-2);line-height:1.7">${p}</li>`).join("")}</ul>
-    </div>`;
-  }
-  // Carousel
-  const screens = d.screens || [];
-  if (screens.length){
-    const disclaimer = d.overview && d.overview.disclaimer;
-    const slides = screens.map(s => {
-      const inner = s.html
-        ? `<div class="ratio" style="overflow:hidden">${s.html}</div>`
-        : s.img
-          ? `<div class="ratio"><img src="${s.img}" alt="${s.cap||''}" onerror="this.parentNode.innerHTML='<div class=&quot;cs-carousel-ph&quot;>${placeholderIconSVG.replace(/"/g,'&quot;').replace(/'/g,'&apos;')}<span>${(s.cap||'').replace(/'/g,'&apos;')}</span></div>'"/></div>`
-          : `<div class="ratio"><div class="cs-carousel-ph">${placeholderIconSVG}<span>${s.cap||''}</span></div></div>`;
-      return `<div class="cs-carousel-slide">${inner}${s.cap?`<div class="cs-carousel-cap">${s.cap}</div>`:""}</div>`;
-    }).join("");
-    const disclaimerHtml = disclaimer
-      ? `<div style="display:flex;align-items:start;gap:10px;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;margin-bottom:10px">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;opacity:.6"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <span style="font-family:'DM Mono',monospace;font-size:10.5px;color:var(--text-dim);line-height:1.6;letter-spacing:0.02em">${disclaimer}</span>
-        </div>`
-      : "";
-    html += `<div class="cs-blk"><h4 class="cs-h">Screens</h4>${disclaimerHtml}
-      <div class="cs-carousel">
-        <div class="cs-carousel-vp"><div class="cs-carousel-track">${slides}</div></div>
-        <div class="cs-carousel-nav">
-          <button class="cs-carousel-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
-          <button class="cs-carousel-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-        </div>
-        <div class="cs-carousel-dots">${screens.map((_,i)=>`<button class="cs-carousel-dot${i===0?' active':''}" data-i="${i}"></button>`).join("")}</div>
-      </div>
-    </div>`;
-  }
   return html;
 }
 
+// ───── renderProjectTab is still used by the 'more' case (exempt multi-project format) ─────
 function renderProjectTab(p){
   let html = "";
   if (p.lede) html += `<div class="cs-lede">${p.lede}</div>`;
   if (p.context) html += `<div class="cs-blk"><h4 class="cs-h">Context</h4><p>${p.context}</p></div>`;
   if (p.did) html += `<div class="cs-blk"><h4 class="cs-h">What We Did</h4><p>${p.did}</p></div>`;
   if (p.outcome) html += `<div class="cs-blk"><h4 class="cs-h">Outcome</h4><p>${p.outcome}</p></div>`;
-  if (p.imgs && p.imgs.length === 1){
-    const im = p.imgs[0];
-    html += `<div class="cs-img"><div class="ratio" style="aspect-ratio:16/9;overflow:hidden"><img src="${im.img}" alt="${im.cap||''}" onerror="this.parentNode.innerHTML='<div class=&quot;cs-carousel-ph&quot; style=&quot;padding:40px&quot;>${placeholderIconSVG.replace(/"/g,'&quot;').replace(/'/g,'&apos;')}</div>'"/></div>${im.cap?`<div class="cs-img-cap">${im.cap}</div>`:``}</div>`;
-  } else if (p.imgs && p.imgs.length > 1){
-    const slides = p.imgs.map(s=>{
-      const inner = s.img ? `<div class="ratio"><img src="${s.img}" alt="${s.cap||''}" onerror="this.parentNode.innerHTML='<div class=&quot;cs-carousel-ph&quot;>${placeholderIconSVG.replace(/"/g,'&quot;').replace(/'/g,'&apos;')}</div>'"/></div>`
-        : `<div class="ratio"><div class="cs-carousel-ph">${placeholderIconSVG}<span>${s.cap||''}</span></div></div>`;
-      return `<div class="cs-carousel-slide">${inner}${s.cap?`<div class="cs-carousel-cap">${s.cap}</div>`:""}</div>`;
-    }).join("");
-    html += `<div class="cs-blk"><div class="cs-carousel">
-      <div class="cs-carousel-vp"><div class="cs-carousel-track">${slides}</div></div>
-      <div class="cs-carousel-nav">
-        <button class="cs-carousel-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
-        <button class="cs-carousel-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-      </div>
-      <div class="cs-carousel-dots">${p.imgs.map((_,i)=>`<button class="cs-carousel-dot${i===0?' active':''}" data-i="${i}"></button>`).join("")}</div>
-    </div></div>`;
+  if (p.imgs && p.imgs.length){
+    html += `<div class="cs-blk">${renderCarousel(p.imgs)}</div>`;
   }
   return html;
 }
 
+let modalOpenerEl = null;
+
 function openCase(id){
   const d = CASES_DATA[id];
   if (!d) return;
+  const wasOpen = caseModal.classList.contains("open");
+  if (!wasOpen) modalOpenerEl = document.activeElement;
   currentCaseId = id;
   const iconEl = document.getElementById("csIco");
   iconEl.src = d.icon || "";
@@ -1549,8 +2028,12 @@ function openCase(id){
 
   const tabsEl = document.querySelector(".cs-tabs");
   const bodyEl = document.getElementById("csBody");
+  const introEl = document.getElementById("csIntro");
+  introEl.innerHTML = (!d.isMultiProject && !isTodo(d.shift)) ? d.shift : "";
 
-  if (d.projectTabs){
+  if (d.isMultiProject){
+    // EXEMPT FORMAT: 'more' only — grab-bag of small projects, no single before/after arc
+    tabsEl.removeAttribute("role");
     tabsEl.innerHTML = d.projectTabs.map((p,i)=>
       `<button class="cs-tab${i===0?" active":""}" data-ptab="${i}">${p.name}</button>`
     ).join("");
@@ -1567,17 +2050,19 @@ function openCase(id){
       });
     });
   } else {
+    // Intro (persistent) → Before/Discovery / What I Did / Impact (tabs)
+    tabsEl.setAttribute("role","tablist");
     tabsEl.innerHTML = `
-      <button class="cs-tab active" data-tab="overview">Overview</button>
-      <button class="cs-tab" data-tab="process">Process</button>
-      <button class="cs-tab" data-tab="screens">Outcome + Screens</button>`;
+      <button class="cs-tab active" role="tab" aria-selected="true" aria-controls="cs-before" id="cs-tab-before" data-tab="before">Before / Discovery</button>
+      <button class="cs-tab" role="tab" aria-selected="false" aria-controls="cs-whatidid" id="cs-tab-whatidid" data-tab="whatidid">What I Did</button>
+      <button class="cs-tab" role="tab" aria-selected="false" aria-controls="cs-afterimpact" id="cs-tab-afterimpact" data-tab="afterimpact">Outcome + Impact</button>`;
     bodyEl.innerHTML = `
-      <div class="cs-section" id="cs-overview"></div>
-      <div class="cs-section hidden" id="cs-process"></div>
-      <div class="cs-section hidden" id="cs-screens"></div>`;
-    document.getElementById("cs-overview").innerHTML = renderOverview(d);
-    document.getElementById("cs-process").innerHTML = renderProcess(d);
-    document.getElementById("cs-screens").innerHTML = renderScreens(d);
+      <div class="cs-section" id="cs-before" data-tab="before" role="tabpanel" aria-labelledby="cs-tab-before"></div>
+      <div class="cs-section hidden" id="cs-whatidid" data-tab="whatidid" role="tabpanel" aria-labelledby="cs-tab-whatidid"></div>
+      <div class="cs-section hidden" id="cs-afterimpact" data-tab="afterimpact" role="tabpanel" aria-labelledby="cs-tab-afterimpact"></div>`;
+    document.getElementById("cs-before").innerHTML = renderBefore(d);
+    document.getElementById("cs-whatidid").innerHTML = renderWhatIDid(d);
+    document.getElementById("cs-afterimpact").innerHTML = renderAfterImpact(d);
     tabsEl.querySelectorAll(".cs-tab").forEach(t=>t.addEventListener("click",()=>switchTab(t.dataset.tab)));
   }
 
@@ -1588,8 +2073,28 @@ function openCase(id){
   caseModal.classList.add("open");
   caseModal.setAttribute("aria-hidden","false");
   document.body.style.overflow = "hidden";
-  if (!d.projectTabs) switchTab("overview");
-  else setTimeout(initAllCarousels,60);
+  if (d.isMultiProject) setTimeout(initAllCarousels,60);
+  else switchTab("before");
+
+  // Only the FIRST open of a modal session pushes a history entry. Prev/Next
+  // navigation while already open replaces that same entry instead of stacking
+  // new ones — otherwise Close (history.back()) only unwinds one case at a time
+  // instead of returning to the page behind the modal.
+  const hash = "#case/" + id;
+  if (location.hash !== hash){
+    if (wasOpen) history.replaceState({caseModal:id}, "", hash);
+    else history.pushState({caseModal:id}, "", hash);
+  }
+  track("case_open", {id});
+
+  // Move focus into the modal on open (WCAG 2.4.3 / 2.1.2) — only on the initial
+  // open, not when navCase() re-runs openCase() for prev/next while already open.
+  if (!wasOpen) requestAnimationFrame(() => document.getElementById("csClose").focus());
+}
+
+function getModalFocusable(){
+  return Array.from(caseModal.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+    .filter(el => el.offsetParent !== null);
 }
 
 function closeCase(){
@@ -1597,15 +2102,43 @@ function closeCase(){
   caseModal.setAttribute("aria-hidden","true");
   document.body.style.overflow = "";
   currentCaseId = null;
+  if (modalOpenerEl && typeof modalOpenerEl.focus === "function") modalOpenerEl.focus();
+  modalOpenerEl = null;
 }
 
+// User-initiated close (X button, Esc): if we pushed the history entry that got us
+// here, step back so the browser's own back button and our close button agree.
+// If the case was opened via a direct deep link (no pushed entry to return to),
+// just strip the hash instead of navigating away from the site.
+function requestCloseCase(){
+  if (location.hash.indexOf("#case/") === 0 && history.state && history.state.caseModal){
+    history.back();
+  } else if (location.hash){
+    history.replaceState(null, "", location.pathname + location.search);
+    closeCase();
+  } else {
+    closeCase();
+  }
+}
+
+window.addEventListener("popstate", () => {
+  const m = location.hash.match(/^#case\/([\w-]+)$/);
+  if (m && CASES_DATA[m[1]]) openCase(m[1]);
+  else closeCase();
+});
+
 function switchTab(tab){
-  document.querySelectorAll(".cs-tab").forEach(t=>t.classList.toggle("active", t.dataset.tab===tab));
-  ["overview","process","screens"].forEach(t=>{
-    document.getElementById("cs-"+t).classList.toggle("hidden", t!==tab);
+  document.querySelectorAll(".cs-tab").forEach(t=>{
+    const active = t.dataset.tab === tab;
+    t.classList.toggle("active", active);
+    if (t.hasAttribute("aria-selected")) t.setAttribute("aria-selected", active ? "true" : "false");
+  });
+  document.querySelectorAll("#csBody > .cs-section").forEach(sec=>{
+    sec.classList.toggle("hidden", sec.dataset.tab !== tab);
   });
   document.getElementById("csBody").scrollTop = 0;
   setTimeout(initAllCarousels, 60);
+  track("tab_switch", {tab, case: currentCaseId || ""});
 }
 
 function navCase(dir){
@@ -1621,16 +2154,59 @@ window.closeCase = closeCase;
 window.switchTab = switchTab;
 window.navCase = navCase;
 
-document.getElementById("csClose").addEventListener("click", closeCase);
-document.getElementById("csOverlay").addEventListener("click", closeCase);
+document.getElementById("csClose").addEventListener("click", requestCloseCase);
 document.getElementById("csPrev").addEventListener("click", ()=>navCase(-1));
 document.getElementById("csNext").addEventListener("click", ()=>navCase(1));
 document.addEventListener("keydown",(e)=>{
   if (!caseModal.classList.contains("open")) return;
-  if (e.key==="Escape") closeCase();
+  if (e.key==="Escape") requestCloseCase();
   if (e.key==="ArrowLeft") navCase(-1);
   if (e.key==="ArrowRight") navCase(1);
+  if (e.key==="Tab"){
+    const focusable = getModalFocusable();
+    if (!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length-1];
+    if (e.shiftKey && document.activeElement === first){
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last){
+      e.preventDefault(); first.focus();
+    }
+  }
 });
+
+// Deep link on load: a URL like #case/bofa opens that case directly.
+(function(){
+  const m = location.hash.match(/^#case\/([\w-]+)$/);
+  if (m && CASES_DATA[m[1]]) openCase(m[1]);
+})();
+
+// ───── ANALYTICS ─────
+// No-ops until a real Plausible/umami account is wired to window.plausible.
+function track(event, props){
+  if (typeof window.plausible === "function") window.plausible(event, props ? {props} : undefined);
+}
+
+document.addEventListener("click", (e) => {
+  const tracked = e.target.closest("[data-track]");
+  if (tracked) track(tracked.dataset.track);
+  const figmaLink = e.target.closest(".cs-figma-link");
+  if (figmaLink) track("figma_click", {case: currentCaseId || ""});
+});
+
+(function(){
+  const fired = {25:false, 50:false, 75:false, 100:false};
+  window.addEventListener("scroll", () => {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight <= 0) return;
+    const scrolled = (window.scrollY / docHeight) * 100;
+    [25,50,75,100].forEach(mark => {
+      if (!fired[mark] && scrolled >= mark){
+        fired[mark] = true;
+        track("scroll_depth", {percent: mark});
+      }
+    });
+  }, {passive:true});
+})();
 
 document.querySelectorAll(".case").forEach(card=>{
   card.addEventListener("keydown", e=>{
